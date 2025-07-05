@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card overflow-hidden">
     <DataView :value="products" :layout="layout">
       <template #header>
         <div class="flex justify-content-end">
@@ -36,23 +36,24 @@
 
       <template #grid="slotProps">
         <div class="p-2 flex grid gap-3 justify-content-center">
-          <div v-for="(item, index) in slotProps.items" :key="index"
-            class=" border-1 border-round border-base-color col-12 sm:col-6 md:col-2">
-            <div class="flex flex-column align-items-center justify-content-center">
-              <div class=" border-1 p-1 border-round border-base-color " style="width: 150px;">
-                <img class="w-full" :src="item.image" alt="">
-              </div>
-              <div class="ml-2 py-2 flex flex-column justify-content-between">
-                <div class="text-center roboto-regular text-sm">
-                  {{ item.category }}<br>
-                  {{ item.name }}
+          <div v-for="(item, index) in slotProps.items" :key="index" class=" col-12 sm:col-6 md:col-2">
+            <div class="border-1 border-round border-base-color p-2">
+              <div class="flex flex-column align-items-center justify-content-center">
+                <div class=" border-1 p-1 border-round border-base-color " style="width: 150px;">
+                  <img class="w-full" :src="item.image" alt="">
                 </div>
-                <div class="flex justify-content-center">
-                  <Rating v-model="item.rating" disabled />
+                <div class="ml-2 py-2 flex flex-column justify-content-between">
+                  <div class="text-center roboto-regular text-sm">
+                    {{ item.category }}<br>
+                    {{ item.name }}
+                  </div>
+                  <div class="flex justify-content-center">
+                    <Rating v-model="item.rating" disabled />
+                  </div>
                 </div>
-              </div>
-              <div class="flex justify-content-center w-full">
-                <Button class="w-full roboto-regular">View</Button>
+                <div class="flex justify-content-center w-full">
+                  <Button class="w-full roboto-regular">View</Button>
+                </div>
               </div>
             </div>
           </div>
