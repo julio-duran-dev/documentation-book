@@ -15,6 +15,7 @@ import imgVite from "../assets/img/vite.png"
 import imgTypeScript from "../assets/img/Typescript.svg.png"
 import imgCss from "../assets/img/Css.png"
 import imgGit from "../assets/img/git-logo.png"
+import imgPowerShell from "../assets/img/powerShell.png"
 
 export const dataFrameworks = [
   {
@@ -127,6 +128,13 @@ export const dataFrameworks = [
     name: "Git",
     category: CATEGORIS.VCS,
     image: imgGit,
+    rating: 4
+  },
+  {
+    id: 17,
+    name: "PowerShell",
+    category: CATEGORIS.CMD,
+    image: imgPowerShell,
     rating: 4
   },
 ]
