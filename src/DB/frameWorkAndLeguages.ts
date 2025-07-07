@@ -12,6 +12,8 @@ import imgLibrerias from "../assets/img/librerias.jpg"
 import imgSupabase from "../assets/img/supabase.webp"
 import imgCloudays from "../assets/img/cloudways.png"
 import imgVite from "../assets/img/vite.png"
+import imgTypeScript from "../assets/img/Typescript.svg.png"
+import imgCss from "../assets/img/Css.png"
 
 export const dataFrameworks = [
   {
@@ -104,5 +106,19 @@ export const dataFrameworks = [
     category: CATEGORIS.BuildTool,
     image: imgVite,
     rating: 3
+  },
+  {
+    id: 14,
+    name: "Typescript",
+    category: CATEGORIS.Language,
+    image: imgTypeScript,
+    rating: 3
+  },
+  {
+    id: 15,
+    name: "Css",
+    category: CATEGORIS.Language,
+    image: imgCss,
+    rating: 4
   },
 ]
