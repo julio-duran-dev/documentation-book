@@ -1,4 +1,4 @@
-import { CATEGORIS } from "./categoris"
+import { CATEGORIS } from "./categoris.ts"
 import imgVue from "../assets/logo.svg"
 import imgNext from "../assets/img/nextjs.jpeg"
 import imgReacNative from "../assets/img/reactnative.svg"
@@ -9,6 +9,9 @@ import flutterFlow from "../assets/img/flutterflow.png"
 import imgSolid from "../assets/img/solid.png"
 import imgNetsuite from "../assets/img/netsuite.webp"
 import imgLibrerias from "../assets/img/librerias.jpg"
+import imgSupabase from "../assets/img/supabase.webp"
+import imgCloudays from "../assets/img/cloudways.png"
+import imgVite from "../assets/img/vite.png"
 
 export const dataFrameworks = [
   {
@@ -44,7 +47,7 @@ export const dataFrameworks = [
     name: "Java script",
     category: CATEGORIS.Language,
     image: imgJavascritp,
-    rating: 4
+    rating: 5
   },
   {
     id: 6,
@@ -79,6 +82,27 @@ export const dataFrameworks = [
     name: "Libraries",
     category: CATEGORIS.Libraries,
     image: imgLibrerias,
-    rating: 2
+    rating: 5
+  },
+  {
+    id: 11,
+    name: "Supabase",
+    category: CATEGORIS.DataBase,
+    image: imgSupabase,
+    rating: 4
+  },
+  {
+    id: 12,
+    name: "Cloud Ways",
+    category: CATEGORIS.Server,
+    image: imgCloudays,
+    rating: 3
+  },
+  {
+    id: 13,
+    name: "Vite",
+    category: CATEGORIS.BuildTool,
+    image: imgVite,
+    rating: 3
   },
 ]

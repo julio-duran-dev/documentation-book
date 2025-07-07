@@ -16,7 +16,7 @@
           <div v-for="(item, index) in slotProps.items" :key="index"
             class="mt-2 border-1 flex align-items-center justify-content-between p-1 border-round border-base-color">
             <div class="flex">
-              <div class=" border-1 p-1 border-round border-base-color" style="width: 100px;height: 100px;">
+              <div class=" border-1 p-1 border-round border-base-color flex" style="width: 100px;height: 100px;">
                 <img class="w-full" :src="item.image" alt="">
               </div>
               <div class="ml-2 py-2 flex flex-column justify-content-between roboto">
@@ -28,7 +28,7 @@
               </div>
             </div>
             <div>
-              <Button class="mr-3 px-5 roboto-regular">View</Button>
+              <Button @click="viewInfo(item.id)" class="mr-3 px-5 roboto-regular">View</Button>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
                   </div>
                 </div>
                 <div class="flex justify-content-center w-full">
-                  <Button class="w-full roboto-regular">View</Button>
+                  <Button @click="viewInfo(item.id)" class="w-full roboto-regular">View</Button>
                 </div>
               </div>
             </div>
@@ -69,12 +69,16 @@
 
 <script setup lang="ts">
 import DataView from 'primevue/dataview';
-import logoVue from '@/assets/logo.svg'
-import { dataFrameworks } from '@/DB/frameWorkAndLeguages.js'
-import { ref, onMounted } from "vue";
+import { useRouter } from 'vue-router';
+import { dataFrameworks } from '@/DB/frameWorkAndLeguages.ts'
+import { ref } from "vue";
 
 const layout = ref('grid');
 const options = ref(['list', 'grid']);
+const router = useRouter()
 
+const viewInfo = (id: string) => {
+  router.push({ name: 'plataform', params: { id } })
+}
 
 </script>

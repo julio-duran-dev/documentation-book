@@ -1,3 +1,12 @@
 body {
   margin: 0;
 }
+
+
+.border-base-color {
+  border-color: rgb(188, 188, 200);
+}
+
+.text-base-color {
+  color: rgb(87, 87, 90);
+}

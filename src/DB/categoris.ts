@@ -5,6 +5,9 @@ export const CATEGORIS = {
     DevelopmentPlatform: 'Development Platform',
     CloudERPPlatform: 'Cloud ERP Platform', //Plataforma empresarial en la nube para ERP, CRM, SaaS Platform, etc.
     SoftwareDesignPrinciples: 'Software Design Principles',
-    Libraries: 'Libraries'
+    Libraries: 'Libraries',
+    DataBase: 'Data base',
+    Server: 'Server',
+    BuildTool: 'Build Tool'
 
 }
