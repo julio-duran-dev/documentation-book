@@ -1,6 +1,6 @@
 <template>
   <div class="card overflow-hidden">
-    <DataView :value="products" :layout="layout">
+    <DataView :value="dataFrameworks" :layout="layout">
       <template #header>
         <div class="flex justify-content-end">
           <SelectButton v-model="layout" :options="options" :allowEmpty="false">
@@ -16,7 +16,7 @@
           <div v-for="(item, index) in slotProps.items" :key="index"
             class="mt-2 border-1 flex align-items-center justify-content-between p-1 border-round border-base-color">
             <div class="flex">
-              <div class=" border-1 p-1 border-round border-base-color" style="width: 100px;">
+              <div class=" border-1 p-1 border-round border-base-color" style="width: 100px;height: 100px;">
                 <img class="w-full" :src="item.image" alt="">
               </div>
               <div class="ml-2 py-2 flex flex-column justify-content-between roboto">
@@ -39,15 +39,19 @@
           <div v-for="(item, index) in slotProps.items" :key="index" class=" col-12 sm:col-6 md:col-2">
             <div class="border-1 border-round border-base-color p-2">
               <div class="flex flex-column align-items-center justify-content-center">
-                <div class=" border-1 p-1 border-round border-base-color " style="width: 150px;">
+                <div class=" border-1 p-1 border-round border-base-color flex" style="width: 150px;height: 150px;">
                   <img class="w-full" :src="item.image" alt="">
                 </div>
                 <div class="ml-2 py-2 flex flex-column justify-content-between">
                   <div class="text-center roboto-regular text-sm">
-                    {{ item.category }}<br>
-                    {{ item.name }}
+                    <div class="roboto-bold mb-1">
+                      {{ item.category }}
+                    </div>
+                    <div>
+                      {{ item.name }}
+                    </div>
                   </div>
-                  <div class="flex justify-content-center">
+                  <div class="flex justify-content-center my-2">
                     <Rating v-model="item.rating" disabled />
                   </div>
                 </div>
@@ -66,20 +70,9 @@
 <script setup lang="ts">
 import DataView from 'primevue/dataview';
 import logoVue from '@/assets/logo.svg'
+import { dataFrameworks } from '@/DB/frameWorkAndLeguages.js'
 import { ref, onMounted } from "vue";
 
-const products = ref([
-  { name: 'vue', price: '2500', rating: 5, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 3, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 5, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 3, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 5, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 3, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 5, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 3, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 5, category: 'Frame work', image: logoVue },
-  { name: 'vue', price: '2500', rating: 3, category: 'Frame work', image: logoVue },
-]);
 const layout = ref('grid');
 const options = ref(['list', 'grid']);
 
