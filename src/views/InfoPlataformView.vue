@@ -14,7 +14,7 @@
         {{ info.title }}
       </div>
       <div>
-        <Button>View</Button>
+        <Button class="botonBase">View</Button>
       </div>
     </div>
   </div>

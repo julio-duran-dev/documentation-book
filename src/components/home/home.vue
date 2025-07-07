@@ -28,7 +28,7 @@
               </div>
             </div>
             <div>
-              <Button @click="viewInfo(item.id)" class="mr-3 px-5 roboto-regular">View</Button>
+              <Button @click="viewInfo(item.id)" class="mr-3 px-5 roboto-regular botonBase">View</Button>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
                   </div>
                 </div>
                 <div class="flex justify-content-center w-full">
-                  <Button @click="viewInfo(item.id)" class="w-full roboto-regular">View</Button>
+                  <Button @click="viewInfo(item.id)" class="w-full roboto-regular botonBase" style="">View</Button>
                 </div>
               </div>
             </div>

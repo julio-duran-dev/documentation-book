@@ -14,6 +14,7 @@ import imgCloudays from "../assets/img/cloudways.png"
 import imgVite from "../assets/img/vite.png"
 import imgTypeScript from "../assets/img/Typescript.svg.png"
 import imgCss from "../assets/img/Css.png"
+import imgGit from "../assets/img/git-logo.png"
 
 export const dataFrameworks = [
   {
@@ -119,6 +120,13 @@ export const dataFrameworks = [
     name: "Css",
     category: CATEGORIS.Language,
     image: imgCss,
+    rating: 4
+  },
+  {
+    id: 16,
+    name: "Git",
+    category: CATEGORIS.VCS,
+    image: imgGit,
     rating: 4
   },
 ]

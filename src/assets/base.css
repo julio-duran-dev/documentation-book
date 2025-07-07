@@ -1,5 +1,13 @@
 body {
   margin: 0;
+  --p-rating-icon-active-color: rgb(255, 255, 0);
+}
+
+.botonBase {
+  --p-button-primary-background: rgb(52, 144, 235);
+  --p-button-primary-border-color: rgb(45, 134, 223);
+  --p-button-primary-hover-background: rgb(27, 96, 165);
+
 }
 
 
@@ -9,4 +17,8 @@ body {
 
 .text-base-color {
   color: rgb(87, 87, 90);
+}
+
+.color-base-buton {
+  background-color: rgb(52, 144, 235);
 }

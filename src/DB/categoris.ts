@@ -8,6 +8,7 @@ export const CATEGORIS = {
     Libraries: 'Libraries',
     DataBase: 'Data base',
     Server: 'Server',
-    BuildTool: 'Build Tool'
+    BuildTool: 'Build Tool',
+    VCS: 'Version Control System',
 
 }
