@@ -1,8 +1,8 @@
 <template>
   <div class="p-4">
-    <Navar :id-framewrok="id" />
+    <Navar :id-framewrok="id" class="mb-3" />
     <div v-for="info in filteredInfo" :key="info.id"
-      class="border-1 border-base-color p-2 border-round flex align-items-center justify-content-between mb-2">
+      class="border-1 border-base-color p-2 border-round flex align-items-center justify-content-between mb-2 ">
       <div class="roboto-regular text-base-color">
         {{ info.title }}
       </div>
