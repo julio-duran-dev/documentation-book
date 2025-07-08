@@ -1,6 +1,7 @@
 import './assets/main.css'
 import '/node_modules/primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
+import 'prismjs/themes/prism.css'
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 
