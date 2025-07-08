@@ -13,6 +13,7 @@ import DataView from 'primevue/dataview';
 import Button from 'primevue/button';
 import SelectButton from 'primevue/selectbutton';
 import Rating from 'primevue/rating';
+import Galleria from 'primevue/galleria';
 
 
 import App from './App.vue'
@@ -35,5 +36,6 @@ app.component('DataView', DataView)
 app.component('Button', Button)
 app.component('SelectButton', SelectButton)
 app.component('Rating', Rating)
+app.component('Galleria', Galleria)
 
 app.mount('#app')
