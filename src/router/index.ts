@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'plataform',
       component: () => import('../views/InfoPlataformView.vue')
     },
+    {
+      path: '/infoPost/:id',
+      name: 'infoPost',
+      component: () => import('../views/InfoPostView.vue')
+    },
   ],
 })
 

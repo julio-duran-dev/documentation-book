@@ -1,20 +1,13 @@
 <template>
   <div class="p-4">
-    <div class="flex align-items-center justify-content-between">
-      <div class="roboto-bold text-xl text-base-color">
-        {{ plataform?.name }}
-      </div>
-      <div class="">
-        <img :src="plataform?.image" style="width: 150px;height: 100px;" alt="">
-      </div>
-    </div>
+    <Navar :id-framewrok="id" />
     <div v-for="info in filteredInfo" :key="info.id"
-      class="border-1 border-base-color p-2 border-round flex align-items-center justify-content-between">
+      class="border-1 border-base-color p-2 border-round flex align-items-center justify-content-between mb-2">
       <div class="roboto-regular text-base-color">
         {{ info.title }}
       </div>
       <div>
-        <Button class="botonBase">View</Button>
+        <Button class="botonBase" @click="viewPost(info.id)">View</Button>
       </div>
     </div>
   </div>
@@ -22,21 +15,20 @@
 
 <script setup lang="ts">
 import { PlataformInfo } from "@/DB/platformInfo.ts"
-import { dataFrameworks } from "@/DB/frameWorkAndLeguages.ts"
 import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import Navar from '@/components/nabvar/navar.vue';
 
 const route = useRoute()
-const id = route.params.id
-const idNumber = parseInt(id as string)
+const router = useRouter()
+const id = parseInt(route.params.id as string)
 
 const filteredInfo = computed(() =>
-  PlataformInfo.filter((item) => item.idPlataform === idNumber)
+  PlataformInfo.filter((item) => item.idPlataform === id)
 )
 
-
-const plataform = computed(() =>
-  dataFrameworks.find((item) => item.id === idNumber)
-)
+const viewPost = (id: number) => {
+  router.push({ name: 'infoPost', params: { id } })
+}
 
 </script>
