@@ -6,8 +6,9 @@
         {{ infoPost?.title }}
       </div>
 
-      <div class="text-center my-3 roboto-medium text-base-color" v-html="infoPost?.description"></div>
-      <GaleriaImagenes :img="infoPost?.img" />
+      <div class="text-center my-3 roboto-medium text-base-color" v-html="infoPost?.description">
+      </div>
+      <GaleriaImagenes v-if="infoPost?.img?.length > 0" :img="infoPost?.img" />
     </div>
     <div>
       {{ }}
@@ -32,6 +33,15 @@
     <div v-if="infoPost?.codeThree" class="flex justify-content-center mt-4">
       <div class="w-7">
         <CodeBlock :language="'html'" :code="infoPost?.codeThree" />
+      </div>
+    </div>
+
+    <div v-if="infoPost?.descriptionFour" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionFour"></div>
+
+    <div v-if="infoPost?.codeFour" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeFour" />
       </div>
     </div>
   </div>
