@@ -274,5 +274,56 @@ export const PlataformInfo = [
     export default router
 
     `
+  },
+  {
+    id: 6,
+    idPlataform: 10,
+    title: 'Libreria Lodash, utiliza la función debounce que limita la cantidad de veces que se ejecuta una función',
+    img: [],
+    description: `
+    1) Evita que una función se ejecute demasiado seguido Por ejemplo: <br/> <br/>
+    a) Cuando escribes en un campo de búsqueda y quieres hacer llamadas a una API mientras escribes, pero que no se ejecute en cada tecla presionada. <br/> <br/>
+    b) Cuando haces scroll y quieres que algo se ejecute solo después de que el usuario termine de hacer scroll. <br/> <br/>
+    2)  npm install lodash
+    `,
+    codeOne: `
+      import debounce from 'lodash/debounce';
+
+      const handleInput = debounce((event) => {
+        console.log('Buscando:', event.target.value);
+      }, 300);
+
+      // Luego lo usas en un input
+      <input onInput={handleInput} />
+
+    `,
+    descriptionTwo: `
+      Ejemplo con vue: <br/> <br/>
+      1) Dentro del watch params.value.search sera igual a newValue solo cuando haya pasado los 0.8 segundos sin que textNameItem <br/> <br/>
+      2) Cambie si va en el segundo 0.6 y textNameItem cambia de nuevo se reinica el valor de la funcion debounce y comienza de nuevo <br/> <br/>
+    `,
+    codeTwo: `
+    <template>
+      <div>
+        <InputText class="w-20rem" v-model="textNameItem" placeholder="Item or Description Search" />
+      <div>
+    </template>
+
+    <script setup lang="ts">
+    import debounce from 'lodash/debounce'
+
+    const textNameItem = ref('')
+
+    const params = ref({
+      search: '',
+    })
+
+    watch(textNameItem, debounce((newValue) => {
+        params.value.search = newValue
+      }, 800)
+    )
+
+    </script>
+    `
   }
 ]
