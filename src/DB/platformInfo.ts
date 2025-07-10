@@ -91,7 +91,7 @@ export const PlataformInfo = [
   {
     id: 4,
     idPlataform: 1,
-    title: 'Creacion de layout Vue',
+    title: 'Creacion de el componente layout Vue',
     img: [],
     description: `
     1) En este ejemplo creamos un componente DasboardLayout.vue Este componente actúa como un guardia de autenticación (auth guard). Solo permite acceder a la 
@@ -210,4 +210,69 @@ export const PlataformInfo = [
       d) Alertas globales,	Alert	Muestra mensajes tipo modal <br/><br/>
     `
   },
+  {
+    id: 5,
+    idPlataform: 1,
+    title: 'Utilizacion de componente layout en las rutas en Vue Router',
+    img: [],
+    description: `
+    Configuración de rutas <br/><br/>
+    1) Redirige por defecto a /dashboard/ITEMS <br/><br/>
+    2) Usa el componente DashboardLayout como layout para sus rutas hijas <br/><br/>
+    3) Tiene rutas hijas como leads (y sus subrutas),  <br/><br/>
+    4) Esta es la ruta base /dashboard. <br/><br/>
+    5) Si alguien accede directamente a /dashboard, será redirigido a /dashboard/ITEMS automáticamente.  <br/><br/>
+    6) Usa como componente base el DashboardLayout.vue, lo que significa que todas las rutas hijas se van 
+    a renderizar dentro de ese layout usando (router-view />) 
+    
+    `,
+    codeOne: `
+    import { createRouter, createWebHistory } from 'vue-router'
+
+    const router = createRouter({
+      history: createWebHistory(import.meta.env.BASE_URL),
+      routes: [
+        {
+        path: '/dashboard',
+        redirect: '/dashboard/ITEMS',
+        component: () =>
+          import('@/components/layout/DasboardLayout/DasboardLayout.vue'),
+        children: [
+          {
+            path: 'leads',
+            children: [
+              {
+                path: '',
+                name: 'leads',
+                component: () => import('@/views/CRM/LeadsView.vue')
+              },
+              {
+                path: 'create',
+                name: 'createLead',
+                component: () => import('@/views/CRM/CreateLeadView.vue')
+              },
+          },
+          {
+            path: 'CRM/Opportunities',
+            name: 'opportunities',
+            component: () => import('../views/CRM/CrmView.vue')
+          },
+          {
+            path: 'ITEMS',
+            name: 'items',
+            component: () => import('../views/ITEMS/ItemsView.vue')
+          },
+        ]
+       ]
+    })
+
+    router.beforeEach((to, from, next) => {
+      window.scroll(0, 0)
+      next()
+    })
+
+    export default router
+
+    `
+  }
 ]
