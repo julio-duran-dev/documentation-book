@@ -55,8 +55,11 @@
                     <Rating v-model="item.rating" disabled />
                   </div>
                 </div>
-                <div class="flex justify-content-center w-full">
+                <div class=" w-full">
                   <Button @click="viewInfo(item.id)" class="w-full roboto-regular botonBase" style="">View</Button>
+                  <Button @click="viewTechnical(item.id)" class="w-full roboto-regular botonBase mt-2" style="">
+                    Technical area
+                  </Button>
                 </div>
               </div>
             </div>
@@ -81,4 +84,7 @@ const viewInfo = (id: string) => {
   router.push({ name: 'plataform', params: { id } })
 }
 
+const viewTechnical = (id: string) => {
+  router.push({ name: 'Technical', params: { id } })
+}
 </script>

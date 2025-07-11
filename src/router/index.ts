@@ -19,6 +19,11 @@ const router = createRouter({
       name: 'infoPost',
       component: () => import('../views/InfoPostView.vue')
     },
+    {
+      path: '/Technical/:id',
+      name: 'Technical',
+      component: () => import('../views/TechnicalArea.vue')
+    }
   ],
 })
 
