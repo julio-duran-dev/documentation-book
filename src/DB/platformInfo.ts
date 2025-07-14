@@ -3,7 +3,7 @@ import id2img1 from "@/assets/img/imgDB/netsuite/id2Img1.png"
 import id2img2 from "@/assets/img/imgDB/netsuite/id2Img2.png"
 import id2img3 from "@/assets/img/imgDB/netsuite/id2Img3.png"
 import id2img4 from "@/assets/img/imgDB/netsuite/id2Img4.png"
-import { title } from "@primeuix/themes/aura/card"
+import id7img1 from "@/assets/img/imgDB/node/lineasTiempo.png"
 
 export const PlataformInfo = [
   {
@@ -324,6 +324,76 @@ export const PlataformInfo = [
     )
 
     </script>
+    `
+  },
+  {
+    id: 7,
+    idPlataform: 4,
+    img: [id7img1],
+    title: 'Crear un cron job',
+    description: `
+      1) Un cron job es una tarea programada que se ejecuta automáticamente en intervalos de tiempo definidos. <br/><br/>
+      2) En Node.js usamos la librería node-cron  npm install node-cron
+    `,
+    codeOne: `
+    import cron from 'node-cron'
+    import { main } from '../logic/backupMain.js'
+
+    cron.schedule('* * * * *', async () => {
+        console.log('Ejecutando cron diario')
+        try {
+            await main()
+        } catch (err) {
+            console.error('❌ Error en cron:', err)
+        }
+    })
+    `,
+    descriptionTwo: `
+      Esta expresión tiene 5 campos: <br/><br/>
+      0 * * * *	Cada hora en el minuto 0 <br/><br/>
+      0 0 * * *	Todos los días a medianoche <br/><br/>
+      0 12 * * 1-5	A las 12:00 de lunes a viernes <br/><br/>
+      */5 * * * *	Cada 5 minutos <br/><br/>
+      30 14 * * *	Todos los días a las 2:30 PM <br/><br/>
+      0 0 * * 0	Cada domingo a medianoche <br/><br/>
+      */10 * * * *	Cada 10 minutos <br/><br/>
+      0 9 * * 1-5	De lunes a viernes a las 9:00 AM <br/><br/>
+      15 10 1 * *	A las 10:15 AM del día 1 de cada mes <br/><br/>
+      Ejecuta la tarea cada minuto, de cada hora, de cada día, de cada mes, y cualquier día de la semana. <br/><br/>
+      Puedes usar / para intervalos: */5 en el campo de minutos = cada 5 minutos <br/><br/>
+      Puedes usar comas para múltiples valores: 1,15,30 en el campo de minutos = minuto 1, 15 y 30 <br/><br/>
+      Puedes usar rangos: 1-5 en días de la semana = de lunes a viernes <br/><br/>
+    `,
+    codeTwo: `
+      import express from 'express'
+      import path from 'node:path'
+      import cors from 'cors'
+      import netsuiteRoutes from './routes/netsuite-routes.js'
+      import './jobs/cron-backup.js' // <---------------------- importando el cron job
+
+
+      const app = express()
+      const __dirname = path.resolve()
+
+      app.use(express.json({ limit: '50mb' }))
+      app.use(cors())
+      app.use(express.static('dist'))
+
+      app.use('/api/netsuite', netsuiteRoutes)
+
+
+      app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+      })
+
+      export default app
+    `,
+    descriptionThree: `
+    1) En Node.js, nada se ejecuta automáticamente a menos que tú lo:<br/><br/>
+    a) Llames directamente.<br/><br/>
+    b) Lo importes y se ejecute al momento de importarse.<br/><br/>
+    2) Este archivo por sí solo no se ejecuta automáticamente a menos que:<br/><br/>
+     Lo importes en algún lugar (como se hizo en app.js):
     `
   }
 ]
