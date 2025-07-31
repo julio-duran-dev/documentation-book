@@ -415,6 +415,9 @@ export const PlataformInfo = [
     Un conjunto específico de strings (como 'a' | 'b' | 'c')  <br/>
     Un tipo que se pueda usar como clave de objeto  <br/>
     Importante: TypeScript restringe K a keyof any, es decir, claves válidas de objeto.  <br/><br/>
+    Los dos puntos (:) en TypeScript (y también en lenguajes como TypeScript, C#, Swift) se usan para: <br/>
+     Definir el tipo de una variable, constante, parámetro, propiedad o función. <br/><br/>
+
     Ejemplos prácticos <br/><br/>
     `,
     codeOne: `
