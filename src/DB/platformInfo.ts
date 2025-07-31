@@ -395,5 +395,145 @@ export const PlataformInfo = [
     2) Este archivo por sí solo no se ejecuta automáticamente a menos que:<br/><br/>
      Lo importes en algún lugar (como se hizo en app.js):
     `
+  },
+  {
+    id: 8,
+    idPlataform: 14,
+    title: '¿Qué es Record<K, V>?',
+    description: `
+    En TypeScript, Record<K, V> es una utilidad que permite declarar objetos donde: <br/>
+    K: es el tipo de las claves (keys) del objeto. <br/>
+    V: es el tipo de los valores (values) asociados a esas claves. <br/> <br/>
+    En TypeScript, Record es un tipo genérico incorporado (una utility type) que ya viene incluido en el lenguaje. <br/>
+    Es decir, no es una palabra reservada como if o const, pero sí es parte de la biblioteca de tipos estándar de TypeScript. <br/><br/>
+    Record es:	Un tipo genérico nativo de TypeScript <br/>
+    ¿Cómo lo interpreta? :	Como un objeto con claves y valores tipados <br/>
+    ¿Cómo lo sabe? :	Porque está en su librería de tipos estándar <br/> <br/>
+    La estructura de Record siempre sigue esta forma general: Record< K , V >   <br/>
+    K puede ser: <br/>
+    Un string, number, symbol  <br/>
+    Un conjunto específico de strings (como 'a' | 'b' | 'c')  <br/>
+    Un tipo que se pueda usar como clave de objeto  <br/>
+    Importante: TypeScript restringe K a keyof any, es decir, claves válidas de objeto.  <br/><br/>
+    Ejemplos prácticos <br/><br/>
+    `,
+    codeOne: `
+      // 1. Claves dinámicas tipo string
+      Record<string, number>
+      // { [key: string]: number }
+
+      const ejemplo1: Record<string, number> = {
+        edad: 30,
+        altura: 180
+      };
+
+      // 2. Claves fijas (más estricto y seguro)
+      Record<'name' | 'email', string>
+      // { name: string; email: string }
+
+      const ejemplo2: Record<'name' | 'email', string> = {
+        name: 'Julio',
+        email: 'julio@correo.com'
+      };
+
+      // 3. Claves numéricas
+      Record<number, boolean>
+      // { [key: number]: boolean }
+
+      const ejemplo3: Record<number, boolean> = {
+        1: true,
+        2: false
+      };
+    `,
+    descriptionTwo: `
+      ¿Qué tipo de estructuras modela Record? <br/>
+      Solo objetos planos, no arrays, ni funciones, ni clases. <br/>
+    `,
+    codeTwo: `
+      //type Ejemplo = Record<string, number>;
+
+      const obj: Ejemplo = {
+        a: 1,
+        b: 2,
+        c: 3
+      };
+
+      //No es un array
+
+      const arr: Record<number, string> = ['a', 'b']; // ❌ Incorrecto
+
+      //No es una función
+      const fn: Record<string, Function> = () => {}; // ❌ Incorrecto
+
+    `,
+    descriptionThree: `
+      Supongamos que estás modelando usuarios por su ID <br/>
+      Aquí, el ID del usuario será un número (clave), <br/>
+       y el valor será un objeto con propiedades como name, email y isActive.
+    `,
+    codeThree: `
+      type User = {
+        name: string;
+        email: string;
+        isActive: boolean;
+      };
+
+      const users: Record<number, User> = {
+        101: {
+          name: 'Julio Duran',
+          email: 'julio@example.com',
+          isActive: true
+        },
+        102: {
+          name: 'Ana López',
+          email: 'ana@example.com',
+          isActive: false
+        }
+      };
+
+
+      //Ejemplo: Catálogo de productos por categoría
+      //Queremos representar un catálogo donde la clave es el nombre de la categoría (tipo string) y 
+      // el valor es un objeto con información detallada de esa categoría.
+
+      type Product = {
+        id: number;
+        name: string;
+        price: number;
+        metadata?: {
+          tags: string[];
+          dimensions?: {
+            width: number;
+            height: number;
+          };
+        };
+      };
+
+      const catalog: Record<string, Product> = {
+        electronics: {
+          id: 1,
+          name: 'Smartphone',
+          price: 699,
+          metadata: {
+            tags: ['mobile', 'touchscreen'],
+            dimensions: {
+              width: 7,
+              height: 15
+            }
+          }
+        },
+        furniture: {
+          id: 2,
+          name: 'Chair',
+          price: 120,
+          metadata: {
+            tags: ['wood', 'modern']
+            // dimensions puede estar ausente porque es opcional
+          }
+        }
+      };
+
+
+    `
   }
 ]
