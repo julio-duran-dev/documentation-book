@@ -4,6 +4,12 @@ import id2img2 from "@/assets/img/imgDB/netsuite/id2Img2.png"
 import id2img3 from "@/assets/img/imgDB/netsuite/id2Img3.png"
 import id2img4 from "@/assets/img/imgDB/netsuite/id2Img4.png"
 import id7img1 from "@/assets/img/imgDB/node/lineasTiempo.png"
+import id13img1 from "@/assets/img/imgDB/supabase/apiDocsSupabase.png"
+import id13img2 from "@/assets/img/imgDB/supabase/apiDocsSupabase_2.png"
+import id13img3 from "@/assets/img/imgDB/supabase/apiDocsSupabase_3.png"
+import id13img4 from "@/assets/img/imgDB/supabase/apiDocsSupabase_4.png"
+import id13img5 from "@/assets/img/imgDB/supabase/apiDocsSupabase_5.png"
+import id13img6 from "@/assets/img/imgDB/supabase/apiDocsSupabase_6.png"
 import { title } from "@primeuix/themes/aura/card"
 
 export const PlataformInfo = [
@@ -951,5 +957,50 @@ Y en tu main:
     descriptionFive: `
     Después de eso, el .env quedará solo en tu máquina y GitHub no lo recibirá más
     `
+  },
+  {
+    id: 13,
+    idPlataform: 11,
+    title: 'Configurar Supabese en Vue',
+    img: [id13img1, id13img2, id13img3, id13img4, id13img5, id13img6],
+    description: `
+    Para configurar supabase primero tenemos que crear el cliente segun la documentacion de supabase que se encuentra en <br/>
+    API Docs como se muestra en la imagen (1) hay que crear un cliente que seria el siguiente 
+    `,
+    codeOne: `
+    import { createClient } from '@supabase/supabase-js'
+
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+    const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+
+    export const supabase = createClient(supabaseUrl, supabaseKey)
+
+    `,
+    descriptionTwo: `
+    Se optienen la supabaseUrl y la supabaseKey de la documentacion del proyecto de supabase en el apartado de setings <br/>
+    en la pestaña de Data API encontramos la supabaseUrl como se muestra en la imagen numero (2) <br/><br/>
+    Y en API Keys se encuentra la supabaseKey que seria la anon public como se muestra en la imagen numero (3) <br/><br/>
+    Se configuran la variables de entorno en este caso estamos usando la configuracion de VITE que nos permite establecer la variables<br/>
+    de entorno  en el archivo .env
+    `,
+    codeTwo: `
+    VITE_SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvcW1ubW5ocnFvcnZqbXByc29lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ2NzUxNTAsImV4cCI6MjA3MDI1MTE1MH0.ciVobNdmwx27Iyfil6JZ7DC3he_1egerVwouxWuW8Os'
+    VITE_SUPABASE_URL='https://woqmnmnhrqorvjmprsoe.supabase.co'
+    `,
+    descriptionThree: `
+    Una ves creado en cliente tenemos que instalar la libreria de supabase, esa informacion la encontramos en API Docs en la opcion de <br/>
+    Introduction como se muestra en la imagen numero (4) se le da a la opcion de Docs <br/><br/>
+    Eso nos llevara a la documentacion Rest Api como se muestre en la imagen (5) en la cuen encotraremos la opcion Client Libraries <br/>
+    hay tendremos que seleccionar la documentacion del lenguje que estamos usando en este caso es javascript/typescript le damos al boto de Docs <br/><br/>
+    una ves precionado ese boton nos llevara a la documetacion de supabase de javascript como muestra en la imagen (6) y hay nos muestra que tendremos que instalar la <br/>
+    libreria de supabase
+    `,
+    codeThree: `
+    npm install @supabase/supabase-js
+    `
+
+
+
+
   }
 ]
