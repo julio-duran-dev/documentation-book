@@ -4,6 +4,7 @@ import id2img2 from "@/assets/img/imgDB/netsuite/id2Img2.png"
 import id2img3 from "@/assets/img/imgDB/netsuite/id2Img3.png"
 import id2img4 from "@/assets/img/imgDB/netsuite/id2Img4.png"
 import id7img1 from "@/assets/img/imgDB/node/lineasTiempo.png"
+import { title } from "@primeuix/themes/aura/card"
 
 export const PlataformInfo = [
   {
@@ -889,7 +890,66 @@ Y en tu main:
     codeFive: `
     git switch julio
     `
-
-
+  },
+  {
+    id: 11,
+    idPlataform: 13,
+    title: 'Acceso a las variables de entorno del archivo .env',
+    description: `
+    Con Vite en un proyecto Vue tienes acceso a las variables de entorno definidas en archivos .env.
+    <br/> 
+    Pero hay un detalle importante: las variables de entorno que quieras usar en el código cliente (Vue) deben empezar con el prefijo VITE_. <br/>
+    Por ejemplo, si tienes en .env:
+    `,
+    codeOne: `
+    VITE_API_URL=https://api.midominio.com
+    `,
+    descriptionTwo: `
+    En tu código Vue puedes acceder con:
+    `,
+    codeTwo: `
+    console.log(import.meta.env.VITE_API_URL)
+    `,
+    descriptionThree: `Sin el prefijo VITE_, las variables no estarán disponibles en el cliente por seguridad.
+    <br/>
+    Además, Vite soporta varios archivos .env según el modo (.env, .env.production, .env.local, etc.).`
+  },
+  {
+    id: 12,
+    idPlataform: 16,
+    title: 'Configurar el gitignore',
+    description: `
+    Para evitar que tu archivo .env se suba a GitHub, debes agregarlo al archivo .gitignore de tu proyecto. <br />
+    Abre el archivo .gitignore que está en la raíz del proyecto. <br/>
+    Si no existe, créalo <br/>
+    Agrega esta línea:
+    `,
+    codeOne: `
+    .env
+    `,
+    descriptionTwo: `
+    Si tienes más de uno (por ejemplo .env.local, .env.production), puedes ignorarlos todos con:
+    `,
+    codeTwo: `
+    .env*
+    `,
+    descriptionThree: `
+    Guarda el archivo.
+    <br />
+    Si ya habías subido .env antes, Git seguirá rastreándolo aunque lo pongas en .gitignore.<br />
+    En ese caso, primero tienes que quitarlo del índice de Git (sin borrarlo localmente):
+    `,
+    codeThree: `
+    git rm --cached .env
+    `,
+    descriptionFour: `
+    Y luego confirmas el cambio:
+    `,
+    codeFour: `
+    git commit -m "Stop tracking .env file"
+    `,
+    descriptionFive: `
+    Después de eso, el .env quedará solo en tu máquina y GitHub no lo recibirá más
+    `
   }
 ]
