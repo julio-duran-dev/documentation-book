@@ -44,6 +44,60 @@
         <CodeBlock :language="'html'" :code="infoPost?.codeFour" />
       </div>
     </div>
+
+    <div v-if="infoPost?.descriptionFive" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionFive"></div>
+
+    <div v-if="infoPost?.codeFive" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeFive" />
+      </div>
+    </div>
+
+    <div v-if="infoPost?.descriptionSix" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionSix"></div>
+
+    <div v-if="infoPost?.codeSix" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeSix" />
+      </div>
+    </div>
+
+    <div v-if="infoPost?.descriptionSeven" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionSeven"></div>
+
+    <div v-if="infoPost?.codeSeven" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeSeven" />
+      </div>
+    </div>
+
+    <div v-if="infoPost?.descriptionEight" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionEight"></div>
+
+    <div v-if="infoPost?.codeEight" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeEight" />
+      </div>
+    </div>
+
+    <div v-if="infoPost?.descriptionNine" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionNine"></div>
+
+    <div v-if="infoPost?.codeNine" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeNine" />
+      </div>
+    </div>
+
+    <div v-if="infoPost?.descriptionTen" class="text-center mt-3 roboto-medium text-base-color"
+      v-html="infoPost?.descriptionTen"></div>
+
+    <div v-if="infoPost?.codeTen" class="flex justify-content-center mt-4">
+      <div class="w-7">
+        <CodeBlock :language="'html'" :code="infoPost?.codeTen" />
+      </div>
+    </div>
   </div>
 </template>
 

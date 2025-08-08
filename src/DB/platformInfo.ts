@@ -538,5 +538,321 @@ export const PlataformInfo = [
 
 
     `
+  },
+  {
+    id: 9,
+    idPlataform: 10,
+    title: '@tanstack/vue-query',
+    description: `
+     @tanstack/vue-query es una biblioteca (una dependencia externa de NPM) diseñada específicamente para manejar data-fetching y gestión de estados del servidor en aplicaciones Vue. b\<br/>
+    Es parte del ecosistema de TanStack Query, que incluye versiones para React, Solid, Svelte, y Vue. <br/> <br/>
+
+    ¿Para qué sirve? ¿Qué problemas resuelve? <br/>
+    Sin Vue Query: <br/>
+    Tú mismo tienes que hacer todo esto manualmente: <br/><br/>
+
+    Llamar a la API.<br/><br/>
+
+    Guardar la respuesta en un ref o reactive.<br/><br/>
+
+    Mostrar spinners.<br/><br/>
+
+    Controlar errores.<br/><br/>
+
+    Hacer reintentos.<br/><br/>
+
+    Guardar en caché.<br/><br/>
+
+    Revalidar al cambiar de página o volver al componente.<br/><br/><br/>
+
+    Con Vue Query: <br/>
+    Te abstrae todo eso automáticamente. <br/>
+
+🚀 Beneficios clave <br/>
+
+✅ Caching inteligente	Guarda los datos en caché y evita llamadas innecesarias.<br/>
+🔄 Revalidación automática	Vuelve a hacer fetch si el usuario vuelve a una página, o después de una mutación.<br/>
+🔁 Reintentos automáticos	Si una petición falla, puede reintentarse automáticamente.<br/>
+🔃 Mutaciones declarativas	Usa useMutation() para manejar POST, PUT, DELETE con control total del flujo (onSuccess, onError, etc).<br/>
+🧠 Estado sincronizado	El estado se sincroniza automáticamente con los datos del servidor.<br/>
+🧪 Devtools integrados	Puedes ver en tiempo real los estados de tus queries (loading, error, success).<br/>
+⏳ Control automático de loading y error	Puedes usar .isPending, .isError, .data, .error en lugar de manejarlo tú manualmente.<br/>
+🔒 Evita duplicar llamadas	Si varias partes de tu app usan la misma query, Vue Query hace una sola llamada y comparte el resultado.<br/><br/>
+
+npm install @tanstack/vue-query <br/><br/>
+Y en tu main:
+    `,
+    codeOne: `
+    import { VueQueryPlugin } from '@tanstack/vue-query'
+
+    app.use(VueQueryPlugin)
+
+    `,
+    descriptionTwo: ` Ejemplo simple`,
+    codeTwo: `
+    import { useQuery } from '@tanstack/vue-query'
+
+    const { data, isPending, isError } = useQuery({
+      queryKey: ['user', userId],
+      queryFn: () => fetch(/ api / user / $ { userId }).then(res => res.json())
+    })
+
+    //*Esto ya te da:
+
+    data cuando la respuesta llega
+
+    isPending para mostrar un spinner
+
+    isError para manejar errores
+
+    Reintentos, cache, invalidaciones... todo automático. *//
+
+    //La función useMutation de @tanstack/vue-query recibe un objeto de configuración como argumento.
+
+    const mutation = useMutation({
+
+      mutationFn: async (variables) => {
+        // Tu lógica para enviar datos a la API (POST, PUT, DELETE)
+      },
+
+      onSuccess: (data, variables, context) => {
+        // Qué hacer si la mutación fue exitosa
+      },
+
+      onError: (error, variables, context) => {
+        // Qué hacer si la mutación falla
+      },
+
+      onSettled: (data, error, variables, context) => {
+        // Se ejecuta tanto en éxito como en error
+      }
+
+      retry: 3,                             // 🔁 reintentos si falla
+      retryDelay: 1000,                     // ⏱ tiempo entre reintentos
+      mutationKey: ['un-identificador']     // 🔑 opcional: útil para identificar la mutación
+
+    })
+
+
+    `,
+    descriptionThree: `
+      ¿Qué es queryClient.invalidateQueries()? <br /><br/>
+      Es una función de vue-query que marca una o varias queries como "obsoletas" (invalidadas), lo que provoca que se vuelvan a <br/> ejecutar (refetch) para obtener datos actualizados del servidor. <br/><br/>
+      📌 ¿Por qué es útil? <br/> <br/>
+      Cuando haces una mutación (como crear, actualizar o eliminar datos), la caché que tenía esos datos ya no está actualizada. Entonces, <br/> invalidateQueries() le dice a Vue Query:
+      <br/>
+      “Oye, los datos relacionados con esta query podrían haber cambiado, ¡vuelve a consultarlos!”.<br/> <br/>
+       Aquí después de actualizar la dirección (mutación), se marca como obsoleta la query con clave NETSUITE_COMPANIES_ADDRESS. <br/> Vue Query entonces:
+
+      Llama nuevamente al queryFn asociado a esa queryKey. <br/>
+
+      Refresca la UI con los datos nuevos. <br/>
+    `,
+    codeThree: `
+    import { QUERIES_TAGS } from '@/const/queriesTags'
+    import {updateEntityAddress, type UpdateEntityAddressProps} from '@/services/netsuiteCompaniesServices'
+    import { useMutation, useQueryClient } from '@tanstack/vue-query'
+
+    export default function useUpdateEntityAddress() {
+      const queryClient = useQueryClient()
+      const mutate = useMutation({
+        mutationFn: async (body: UpdateEntityAddressProps['body']) => {
+          const result = await updateEntityAddress({ body })
+
+          if (result.error) throw new Error(result.error)
+
+          return result
+        },
+        onSuccess: async (data) => {
+          await queryClient.invalidateQueries({
+            queryKey: [QUERIES_TAGS.NETSUITE_COMPANIES_ADDRESS]
+          })
+        }
+      })
+      return mutate
+    }
+
+    `,
+    descriptionFour: `Diferencia entre useQuery y useMutation en @tanstack/vue-query:`,
+    codeFour: `
+    //Uso principal: Obtener y cachear datos desde una API o fuente remota.
+
+    const { data, isLoading, error } = useQuery({
+      queryKey: ['usuarios'],
+      queryFn: () => fetchUsers()
+    })
+
+    //useMutation – Para modificar datos (POST, PUT, PATCH, DELETE)
+
+    const mutation = useMutation({
+      mutationFn: (nuevoUsuario) => createUser(nuevoUsuario),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['usuarios'] })
+      }
+    })
+
+    `,
+    descriptionFive: `
+      🧨 Se usa cuando quieres hacer un cambio en el servidor. <br/>
+
+      No se cachea automáticamente (tú decides qué hacer en onSuccess o onError). <br/>
+
+      Lo ideal es que después de un cambio, llames a invalidateQueries() para que se recargue el dato actualizado. <br/>
+    `,
+    codeFive: `
+    
+    //useQueryClient – Para manejar la caché global
+    const queryClient = useQueryClient()
+    
+    `,
+    descriptionSix: `En @tanstack/vue-query siempre necesitas una queryKey cuando usas useQuery, y casi siempre es recomendable cuando trabajas <br/> 
+    con invalidateQueries, refetchQueries, o setQueryData <br/>
+    ¿Por qué es obligatoria en useQuery? <br/>
+    La queryKey es la forma en que Vue Query identifica y gestiona la caché. Es como un "nombre único" para cada consulta. <br/>
+    Vue Query usa queryKey para: <br/>
+    Saber si ya tiene datos en caché. <br/>
+
+    Decidir si debe volver a hacer la petición o no. <br/>
+
+    Invalidar, refetchear, o actualizar ese query después (por ejemplo desde una mutación). <br/><br/>
+
+    ¿Qué retorna useMutation()? <br/>
+    mutate no es solo una función, es un objeto con forma más o menos así: <br/><br/>
+
+    `,
+    codeSix: `
+    {
+      mutate: Function,
+      mutateAsync: Function,
+      isPending: Ref<boolean>,
+      isSuccess: Ref<boolean>,
+      isError: Ref<boolean>,
+      status: Ref<"idle" | "pending" | "success" | "error">,
+      ...
+    }
+
+    {
+      mutate,        // 🔘 función para ejecutar la mutación
+      mutateAsync,   // 🔘 versión async/await de mutate
+      isPending,     // ⏳ true mientras se ejecuta
+      isSuccess,     // ✅ true si terminó bien
+      isError,       // ❌ true si hubo error
+      error,         // 💥 el error si falló
+      data           // 📦 el resultado de la mutación
+    }
+
+    //cuando llamas a la funcion en tu componente puedes hacer 
+    
+    const { mutate, isPending, isError, status} = useUpdateEntityAddress()
+
+    `,
+    descriptionSeven: `
+      ¿Qué recibe useQuery? <br/>
+      Recibe un objeto de configuración, usualmente con: <br/>
+    `,
+    codeSeven: `
+      useQuery({
+      queryKey: ['un-identificador-unico'], // 🔑 clave para caché e invalidación
+      queryFn: async () => { ... },         // 📡 función que hace el fetch
+      enabled: true | false,                // ❓ si se debe ejecutar automáticamente
+      staleTime: 10000,                     // ⏳ tiempo que considera los datos "frescos"
+      refetchOnWindowFocus: true,          // 🔁 si refetch al enfocar ventana
+      ...otros callbacks opcionales
+    })
+
+    `,
+    descriptionEight: `
+      ¿Qué retorna useQuery? <br/>
+      Un objeto con múltiples propiedades, entre ellas: <br/>
+    `,
+    codeEight: `
+      {
+        data,         // ✅ los datos que devolvió la query
+        isLoading,    // 🔄 está cargando por primera vez
+        isFetching,   // 🔁 está haciendo fetch (incluso después del primero)
+        isError,      // ❌ hubo error
+        error,        // 🧾 el error lanzado (si existe)
+        refetch,      // 🔁 función para volver a hacer fetch manualmente
+        status,       // 'loading' | 'error' | 'success'
+      }
+    `,
+    descriptionNine: `
+    ¿Cómo funciona mutate(variables, options)? <br/>
+    La función mutate acepta dos argumentos opcionales: <br/>
+
+    variables: los datos que necesita tu mutationFn (en este caso, los datos del address). <br/>
+
+    options: overrides o callbacks específicos para esa invocación de mutate (como onSuccess, onError, etc.). `,
+    codeNine: `
+      mutate(
+        {
+          customerId: address.value.entity,
+          addressbookId: address.value.nKey,
+          ...
+        },
+        {
+          onSuccess: (result) => { ... },
+          onError: (error) => { ... }
+        }
+      )
+    `,
+    descriptionTen: `
+      Esto significa: <br/>
+
+      🚀 Ejecuta mutationFn con el objeto como argumento. <br/>
+
+      🧩 Ejecuta callbacks específicos onSuccess o onError solo para esta llamada. <br/>
+
+      ✅ Si la mutación tiene éxito, ejecuta: <br/>
+
+      El onSuccess definido aquí, si existe. <br/>
+
+      Y también el onSuccess global que definiste en useMutation(...). <br/><br/>
+
+      En resumen:<br/>
+      mutate() puede aceptar un objeto con los datos a enviar (variables) y un segundo objeto con opciones (onSuccess, onError, etc.).<br/>
+
+      Puedes tener callbacks globales (en la definición) y específicos (por invocación).<br/>
+
+      Esto es muy útil cuando una mutación se reutiliza en varios lugares con diferentes necesidades de manejo de resultado.<br/>
+
+      Primero se ejecuta el onSuccess definido en useMutation(...) <br/>
+      Luego se ejecuta el onSuccess que pasas en la llamada a mutate(...)<br/> <br/> <br/> <br/>
+
+      La queryKey es un array que actúa como identificador único para la caché de la query dentro de React Query. <br/> <br/>
+
+      ¿Por qué se usa un array? <br/>
+      React Query permite que la queryKey sea un string o un array. El array es preferido cuando necesitas variar  <br/>
+      partes del identificador dinámicamente (como parámetros). Este array le dice a React Query:  <br/>
+      queryKey: [QUERIES_TAGS.ZOHO_DEALS, params],<br/>
+      “Esta consulta está relacionada con ZOHO_DEALS, y además depende de los params.” <br/> <br/>
+
+      ¿Qué representan esas 2 propiedades?<br/>
+      QUERIES_TAGS.ZOHO_DEALS:<br/><br/>
+
+      Es una constante (probablemente un string) que representa el nombre base o general <br/>
+      de la consulta, por ejemplo: 'zoho_deals'. <br/><br/>
+
+      Sirve para agrupar o identificar todas las queries relacionadas a "Deals".<br/><br/>
+
+      params:<br/>
+
+      Es un objeto Reactivo (ref o reactive) que contiene parámetros variables (como cvid, criteria, page, etc.).<br/>
+
+      Al incluirlo en la queryKey, React Query vuelve a ejecutar la query automáticamente cuando estos parámetros<br/>
+       cambian, porque cambia el valor de la key. <br/><br/><br/>
+
+       ¿Para qué sirve esto?<br/><br/>
+      Caché inteligente:<br/>
+
+      React Query guarda el resultado de cada combinación de queryKey. Así puede reutilizar los datos <br/>
+      si ya se ha hecho una consulta con esos mismos parámetros. <br/>
+
+      Ejemplo: si haces una consulta con page = 1 y luego vuelves a esa página, no vuelve a llamar a la API, usa la caché.<br/><br/>
+
+      Revalidación automática:<br/>
+
+      Si el valor de params cambia (por ejemplo, cambia el criteria o page), React Query detecta que la queryKey ha cambiado y vuelve a ejecutar la consulta automáticamente.
+    `
   }
 ]
