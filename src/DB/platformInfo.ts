@@ -854,5 +854,42 @@ Y en tu main:
 
       Si el valor de params cambia (por ejemplo, cambia el criteria o page), React Query detecta que la queryKey ha cambiado y vuelve a ejecutar la consulta automáticamente.
     `
+  },
+  {
+    id: 10,
+    idPlataform: 16,
+    title: "Crear y cambiar entre ramas",
+    description: `
+      Para crear una nueva rama en Git llamada julio, puedes usar el siguiente comando en tu terminal:
+    `,
+    codeOne: `
+      git branch julio
+    `,
+    descriptionTwo: `
+      Eso crea la rama, pero no cambia a ella. Para crearla y cambiarte directamente a esa rama, usa:
+    `,
+    codeTwo: `
+    git checkout -b julio
+    `,
+    descriptionThree: `
+    O en versiones más recientes de Git, puedes usar:
+    `,
+    codeThree: `
+    git switch -c julio
+    `,
+    descriptionFour: `
+    Si la rama ya existe, para cambiarte a ella no usas -b
+    `,
+    codeFour: `
+    git checkout julio
+    `,
+    descriptionFive: `
+    o con la sintaxis moderna:
+    `,
+    codeFive: `
+    git switch julio
+    `
+
+
   }
 ]
