@@ -15,7 +15,7 @@
     </div>
     <div v-if="infoPost?.codeOne" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeOne" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeOne" />
       </div>
     </div>
     <div v-if="infoPost?.descriptionTwo" class="text-center mt-3 roboto-medium text-base-color"
@@ -23,7 +23,7 @@
 
     <div v-if="infoPost?.codeTwo" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeTwo" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeTwo" />
       </div>
     </div>
 
@@ -32,7 +32,7 @@
 
     <div v-if="infoPost?.codeThree" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeThree" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeThree" />
       </div>
     </div>
 
@@ -41,7 +41,7 @@
 
     <div v-if="infoPost?.codeFour" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeFour" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeFour" />
       </div>
     </div>
 
@@ -50,7 +50,7 @@
 
     <div v-if="infoPost?.codeFive" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeFive" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeFive" />
       </div>
     </div>
 
@@ -59,7 +59,7 @@
 
     <div v-if="infoPost?.codeSix" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeSix" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeSix" />
       </div>
     </div>
 
@@ -68,7 +68,7 @@
 
     <div v-if="infoPost?.codeSeven" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeSeven" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeSeven" />
       </div>
     </div>
 
@@ -77,7 +77,7 @@
 
     <div v-if="infoPost?.codeEight" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeEight" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeEight" />
       </div>
     </div>
 
@@ -86,7 +86,7 @@
 
     <div v-if="infoPost?.codeNine" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeNine" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeNine" />
       </div>
     </div>
 
@@ -95,7 +95,7 @@
 
     <div v-if="infoPost?.codeTen" class="flex justify-content-center mt-4">
       <div class="w-7">
-        <CodeBlock :language="'html'" :code="infoPost?.codeTen" />
+        <CodeBlock :language="'javascript'" :code="infoPost?.codeTen" />
       </div>
     </div>
   </div>

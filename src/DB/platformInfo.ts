@@ -10,6 +10,11 @@ import id13img3 from "@/assets/img/imgDB/supabase/apiDocsSupabase_3.png"
 import id13img4 from "@/assets/img/imgDB/supabase/apiDocsSupabase_4.png"
 import id13img5 from "@/assets/img/imgDB/supabase/apiDocsSupabase_5.png"
 import id13img6 from "@/assets/img/imgDB/supabase/apiDocsSupabase_6.png"
+import id13img7 from "@/assets/img/imgDB/supabase/apiDocsSupabase_7.png"
+import id13img8 from "@/assets/img/imgDB/supabase/apiDocsSupabase_8.png"
+import id13img9 from "@/assets/img/imgDB/supabase/apiDocsSupabase_9.png"
+import id13img10 from "@/assets/img/imgDB/supabase/apiDocsSupabase_10.png"
+import id13img11 from "@/assets/img/imgDB/supabase/apiDocsSupabase_11.png"
 import { title } from "@primeuix/themes/aura/card"
 
 export const PlataformInfo = [
@@ -998,9 +1003,290 @@ Y en tu main:
     codeThree: `
     npm install @supabase/supabase-js
     `
+  },
+  {
+    id: 14,
+    idPlataform: 11,
+    title: 'Crear sistema de login de supabse por emil OTP Email one-time passwords (OTP)',
+    img: [id13img7, id13img8, id13img9, id13img10, id13img11],
+    description: `
+    segun la documentacion de supabase de Email one-time passwords (OTP) <br/><br/>
+    https://supabase.com/docs/guides/auth/auth-email-passwordless?utm_source=chatgpt.com&queryGroups=language&language=js <br/><br/>
+    
+    1).- Primero hay que activar el servicion de auntenticacion por email<br/>
+    2).- Como se muestra en la imagen (1) ir a la pestaña aunthentication luego en la imagen numero (2) en la opcion <br/>
+    sing in/providers, en el apartado de Auth providers, Email tiene que estar Enabled, y las opciones <br/> <br/>
+    *Allow new users to sign up  <br/>
+    *Confirm email  <br/>
+    hay que activarlos por seguridad <br/> <br/>
+    
+    (3).- Nos vamos a el apartado de Email que esta dentro de Auntenticacion hay podemos ver las plantillas que llegan por email <br/>
+    escojemos la plantilla magic link que es la que se usa tamto para Magic link como para otp y como dice la documentacion de supabase <br/>
+    en la imagen numero (4) hay que modificar el tamplate e incluir el {{ .Token }} que es la variable que contiene el otp
+    `,
+    descriptionTwo: `
+    Una ves echo eso ya podemos configurar el codigo para enviar un correo el codigo seria el siguiente <br/>
+    Obtenga el correo electrónico del usuario y llame al método "signInWithOtp" desde su biblioteca de cliente.
+    `,
+    codeTwo: `
+    const { data, error } = await supabase.auth.signInWithOtp({
+      email: 'valid.email@supabase.io',
+      options: {
+        // Establezca esto como falso si no desea que el usuario se registre automáticamente
+      shouldCreateUser: false,
+      },
+    })
+    `,
+    descriptionThree: `
+    Si la solicitud es exitosa, recibirá una respuesta con error: null un dataobjeto donde tanto " user " como session "son nulos". <br/>
+    Avise al usuario que revise su bandeja de entrada. <br/><br/>
+    Si establecemos shouldCreateUser: false, en false tenemos que agregar manualmente un usuario en nuestra base de datos en la tabla de auth.users <br/>
+    como se muestra en la imagen numero (5) de esta manera el sistema verificara que el user se encuentra en la DB y podra enviar el codigo de validacion otp! <br/>
+    cuando el usuario no se encuentra registrado en la tabla auth user manda un error <br/><br/>
 
+    AuthApiError: Signups not allowed for otp <br/><br/>
 
+    lo cual significa que el usuario no se encuentra registrado el la DB <br/>
+    si colocamos shouldCreateUser: true, los usuarios se registran automaticamente y no daria el error ! <br/><br/>
 
+    Luego procedemos con la validacion del otp que sera la siguiente, <br/>
+    Llame al método "verifyOtp" desde su biblioteca de cliente con la dirección de correo electrónico del usuario, el código y un tipo de email:
+    `,
+    codeThree: `
+    const {data: { session }, error } = await supabase.auth.verifyOtp({
+      email: 'email@example.com',
+      token: '123456',
+      type: 'email',
+    })
+    `,
+    descriptionFour: `
+    Si tiene éxito, el usuario habrá iniciado sesión y recibirá una sesión válida que se verá así:
+    `,
+    codeFour: `
+    {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjI3MjkxNTc3LCJzdWIiOiJmYTA2NTQ1Zi1kYmI1LTQxY2EtYjk1NC1kOGUyOTg4YzcxOTEiLCJlbWFpbCI6IiIsInBob25lIjoiNjU4NzUyMjAyOSIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6InBob25lIn0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.1BqRi0NbS_yr1f6hnr4q3s1ylMR3c1vkiJ4e_N55dhM",
+      "token_type": "bearer",
+      "expires_in": 3600,
+      "refresh_token": "LSp8LglPPvf0DxGMSj-vaQ",
+      "user": {...}
+    }
+    `
 
+  },
+  {
+    id: 15,
+    idPlataform: 14,
+    title: 'Interface',
+    description: `
+    En TypeScript, un interface (interfaz) es una forma de definir la estructura que debe tener un objeto, función o clase. <br/>
+    Sirve como un contrato que indica qué propiedades y tipos debe tener algo, sin importar cómo esté implementado.<br/><br/>
+
+    Piensa en una interfaz como un molde o plantilla que describe la forma de los datos, pero no contiene la lógica ni valores concretos.
+    `,
+    codeOne: `
+    interface Persona {
+      nombre: string;
+      edad: number;
+      saludar(): void;
+    }
+
+    const usuario: Persona = {
+      nombre: "Julio",
+      edad: 30,
+      saludar() {
+        console.log('Hola, soy $ {this.nombre}');
+      },
+    };
+    `,
+    descriptionTwo: `
+    En Vue 3 (con TypeScript), cuando usas ref() o reactive() puedes tipar el valor usando genéricos con <>.
+    `,
+    codeTwo: `
+    interface FileInfo {
+      name: string
+      size: number
+      lastModified?: number
+    }
+
+    const file = ref<FileInfo | null>(null)
+
+    `,
+    descriptionThree: `
+    ref<...> → le pasas el tipo que quieres que maneje la ref. <br/>
+    FileInfo | null → es la definición de tipo: puede ser un objeto FileInfo o null. <br/>
+    Esto es útil porque al inicio normalmente no tienes ningún archivo cargado (null), <br/>
+    pero más tarde asignarás un objeto que siga la forma de FileInfo. <br/><br/>
+
+    Si no le pasas el tipo, Vue intenta inferirlo a partir del valor inicial.<br/>
+    Pero como tu valor inicial es null, Vue/TypeScript asumiría que siempre será null y después te daría error si intentas poner un FileInfo. <br/><br/>
+
+    Si el valor inicial ya es del tipo correcto: <br/>
+    const count = ref(0) // TypeScript infiere que es Ref < number > <br/><br/>
+    Pero si empiezas con null, TypeScript cree que siempre será null si no usas tipo explícito: <br/>
+    const file = ref(null) // TypeScript cree que es Ref < null > ❌ <br/><br/>
+
+    Regla práctica:<br/>
+    Si inicializas con un valor claro → no necesitas <>.<br/>
+    Si inicializas con null o un valor ambiguo → usa <> para decirle a TS el tipo esperado.<br/><br/>
+
+    Cuando las propiedades son obligatorias
+  `,
+    codeThree: `
+    interface User {
+      name: string
+      age: number
+    }
+
+    const user = ref<User>({ name: '', age: 0 }) // ✅ Debes poner ambas
+
+    const user = ref<User>({ name: '' }) // ❌ Error: falta 'age'
+    `,
+    descriptionFour: `
+    Si las propiedades son opcionales (?)
+    `,
+    codeFour: `
+      interface User {
+      name?: string
+      age?: number
+    }
+
+    const user = ref<User>({}) // ✅ No es necesario ponerlas
+    `
+  },
+  {
+    id: 16,
+    idPlataform: 14,
+    title: 'Tipado de funciones',
+    description: `
+      Ejemplo de la funcion tipada
+    `,
+    codeOne: `
+    const calcularHorasTranscurridas = (start: string, end: string): string | null => {
+      if (!start || !end) return null;
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      const diffMs = endDate.getTime() - startDate.getTime(); // ✅ usar getTime() devuelve number
+      return (diffMs / (1000 * 60 * 60)).toFixed(2);
+    }
+    `,
+    descriptionTwo: `
+    lo que está dentro de los paréntesis (start: string, end: string) <br/>
+    son los tipos de los parámetros de la función. <br/> <br/>
+
+    Y lo que está después de los paréntesis y los dos puntos (: string | null)  <br/>
+    es el tipo de retorno de la función, o sea, qué tipo de dato va a devolver. <br/><br/>
+
+    start: string → parámetro start debe ser un string<br/>
+    end: string → parámetro end debe ser un string<br/>
+    : string | null → la función devolverá un string o null<br/>
+    (ese | significa unión de tipos puede ser string o null)  <br/>
+    ¿Por qué string | null y no solo string? <br/>
+    En la funcion esta <br/>
+    `,
+    codeTwo: `
+    if (!start || !end) return null;
+    `,
+    descriptionThree: `
+    Entonces hay dos casos: <br/>
+    Si start o end no existen → devuelves null <br/>
+    Si ambos existen → devuelves un string (toFixed(2) siempre devuelve un string) <br/>
+    sta función a veces devuelve un string y a veces devuelve null
+    `
+  },
+  {
+    id: 17,
+    idPlataform: 14,
+    title: 'Configuracion de el archivo tsconfig.json para que TypeScript sepa qué tipo asignarle a un archivo .png por defecto.',
+    description: `
+    En la raíz de tu proyecto (o dentro de src/), crea un archivo llamado por ejemplo: <br/>
+    src/env.d.ts <br/>
+    o <br/>
+    src/shims-vue.d.ts <br/><br/>
+    Dentro agrega:
+    `,
+    codeOne: `
+    declare module '*.png' {
+      const value: string
+      export default value
+    }
+
+    declare module '*.jpg' {
+      const value: string
+      export default value
+    }
+
+    declare module '*.jpeg' {
+      const value: string
+      export default value
+    }
+
+    declare module '*.svg' {
+      const value: string
+      export default value
+    }
+
+    `,
+    descriptionTwo: `
+    Guarda y reinicia el servidor de desarrollo (npm run dev o yarn dev). <br/>
+    Con esto, TypeScript ya sabrá que cuando importas un .png, realmente es una cadena con la ruta final de la imagen. <br/><br/>
+    Lo que hace que tu proyecto lo lea no es el nombre del archivo, sino la extensión .d.ts y el <br/>
+    hecho de que esté en una carpeta incluida en el tsconfig.json.<br/><br/>
+    .d.ts → significa “archivo de declaración de tipos” (type declarations). <br/>
+    TypeScript los busca automáticamente para saber cómo manejar tipos que no reconoce de forma nativa. <br/>
+    El nombre (env, shims-vue, etc.) → realmente no importa para TypeScript. <br/>
+    Puedes llamarlo imagenes.d.ts si quieres. Lo importante es que: <br/>
+    Esté dentro de un directorio incluido por "include" en tu tsconfig.json. <br/>
+    Termine en .d.ts. <br/>
+    Ejemplo de tsconfig.json típico en un proyecto Vue 3 con TypeScript:
+    `,
+    codeTwo: `
+    {
+      "extends": "@vue/tsconfig/tsconfig.dom.json",
+      "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+      "exclude": ["src/**/__tests__/*"],
+      "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+        "paths": {
+          "@/*": ["./src/*"]
+        }
+      }
+    }
+    `,
+
+    descriptionThree: `
+    Eso significa que TypeScript solo va a leer: <br/>
+    Un archivo que se llame exactamente env.d.ts en la raíz del proyecto. <br/>
+    Todo lo que esté dentro de src/ (incluyendo .d.ts que estén ahí). <br/>
+    Si pones tu declaración de imágenes como imagenes.d.ts pero en la raíz, no la va a leer (porque no está en "include").<br/>
+
+    Si la pones como imagenes.d.ts dentro de src/, sí la va a leer (porque src/**/* está incluido).<br/>
+
+    Si la dejas en la raíz, tiene que llamarse env.d.ts para que funcione con tu configuración actual.<br/>
+    `
+  },
+  {
+    id: 18,
+    idPlataform: 11,
+    title: 'Validar la seccion activa del usuario en supabase',
+    description: `
+      Qué pasa cuando haces login en Supabase <br/>
+      Supabase autentica al usuario y devuelve un access token y un refresh token.<br/>
+      Esos tokens se guardan automáticamente en: <br/>
+        localStorage (por defecto en web) <br/>
+        y también en memory mientras la app esté abierta. <br/>
+      La librería de Supabase (cliente JS) recupera esos tokens de localStorage cada vez que se inicializa.<br/>
+      Cómo sabe si la sesión sigue activa <br/>
+    `,
+    codeOne: `
+      const { data: dataUser } = await supabase.auth.getUser()
+    `,
+    descriptionTwo: `
+      El cliente: <br/>
+      Busca el token en localStorage. <br/>
+      Si lo encuentra y no está vencido, lo usa para pedir al backend el usuario actual. <br/>
+      Si el access token está vencido pero existe el refresh token, Supabase lo renueva automáticamente y actualiza localStorage. <br/>
+      Si no hay tokens válidos → devuelve que no hay sesión <br/>
+    `
   }
 ]
