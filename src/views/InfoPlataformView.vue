@@ -17,7 +17,7 @@
 import { PlataformInfo } from "@/DB/platformInfo.ts"
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import Navar from '@/components/nabvar/navar.vue';
+import Navar from '@/components/nabvar/header.vue';
 
 const route = useRoute()
 const router = useRouter()

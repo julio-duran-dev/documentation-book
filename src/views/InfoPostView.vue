@@ -102,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import Navar from '@/components/nabvar/navar.vue';
+import Navar from '@/components/nabvar/header.vue';
 import { useRoute } from 'vue-router';
 import { PlataformInfo } from '@/DB/platformInfo';
 import { computed } from 'vue';

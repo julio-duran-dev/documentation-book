@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import Navar from '@/components/nabvar/navar.vue';
+import Navar from '@/components/nabvar/header.vue';
 import { computed, ref } from "vue";
 import { TechnicalAreaData } from "@/DB/TechnicalArea";
 

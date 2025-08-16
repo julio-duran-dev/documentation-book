@@ -1288,5 +1288,44 @@ Y en tu main:
       Si el access token está vencido pero existe el refresh token, Supabase lo renueva automáticamente y actualiza localStorage. <br/>
       Si no hay tokens válidos → devuelve que no hay sesión <br/>
     `
+  },
+  {
+    id: 19,
+    idPlataform: 14,
+    title: 'Tipado de props en Vue3',
+    description: `
+      En Vue con TypeScript puedes tipar tus props de dos formas: <br/><br/>
+      1. Con un tipo o interfaz de TypeScript <br/>
+      Si ya sabes qué propiedades tiene tu objeto (id, etc.), lo mejor es crear un tipo o interfaz:
+    `,
+    codeOne: `
+      <script setup lang="ts">
+        interface DashboardBackup {
+          id: number
+          name: string
+          createdAt: string
+        }
+
+        const props = defineProps<{
+          dashboardBackup: DashboardBackup
+        }>()
+      </script>
+    `,
+    descriptionTwo: `
+      2. De forma inline (más rápida, sin interfaz) <br/><br/>
+      Si quieres hacerlo directamente sin declarar la interfaz aparte:
+    `,
+    codeTwo: `
+      <script setup lang="ts">
+        const props = defineProps<{
+          dashboardBackup: {
+            id: number
+            name: string
+            createdAt: string
+          }
+        }>()
+      </script>
+
+    `
   }
 ]
