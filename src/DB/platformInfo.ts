@@ -1327,5 +1327,56 @@ Y en tu main:
       </script>
 
     `
+  },
+  {
+    id: 20,
+    idPlataform: 11,
+    title: `Obtener informacion de una tabla de supabase que este relacionada con otras tablas`,
+    description: `
+    En este ejemplo consultamos la tabla tmc de Supabase lo cual tiene una columna status_payment relacionada con la tabla tmc_status_payment <br/>
+    y en vez de devolverte el id de la tabla relacionada (tmc_status_payment) te devuelva directamente el nombre del estado (status) que se encuentra en la tabla tmc_status_payment. <br/>
+      En Supabase, cuando tienes una relación declarada con Foreign Key puedes hacer el select con nested relationships. <br/><br/>
+      Suponiendo que en tu tabla tmc tienes algo como: <br/><br/>
+      status_payment → referencia al campo id de la tabla tmc_status_payment.
+    `,
+    codeOne: `
+      const { data: respTmc, error } = await supabase
+      .from('tmc')
+      .select('*,tmc_status_payment:status_payment (status)')
+      .eq('record_id', id)
+    `,
+    descriptionTwo: `
+    tmc_status_payment:status_payment → le dices a Supabase que la columna status_payment <br/>
+     en tmc está relacionada con la tabla tmc_status_payment.<br/><br/>
+
+    (status) → seleccionas solo la columna status en lugar de todo el objeto. <br/><br/>
+
+    En la sintaxis de Supabase/PostgREST, la parte antes de los dos puntos (:) es el alias que tú eliges, <br/>
+    y lo que va después de los dos puntos debe ser el nombre de la columna de tu tabla actual (tmc) que contiene la relación. <br/><br/>
+
+    En la tabla tmc, tienes la columna status_payment que es un foreign key hacia tmc_status_payment.id. <br/>
+    La tabla relacionada es tmc_status_payment, y de ahí quieres obtener la columna status. <br/>
+    tmc_status_payment → es un alias (usualmente lo ponemos igual al nombre real de la tabla para claridad, pero puede ser cualquier nombre). <br/>
+    status_payment → debe coincidir exactamente con la columna en tmc que tiene la relación (el foreign key). <br/>
+    (status) → son las columnas que quieres traer de la tabla relacionada. <br/><br/>
+    Ejemplo práctico:
+    `,
+    codeTwo: `
+      .select('
+        id,
+        record_id,
+        tmc_status_payment:status_payment (status)
+      ')
+    `,
+    descriptionThree: `
+      Si quieres todas las columnas de la tabla relacionada tmc_status_payment, en vez de poner (status) simplemente usas (*).
+    `,
+    codeThree: `
+      .select('
+        *,
+        tmc_status_payment:status_payment (*)
+      ')
+    `
+
   }
 ]
