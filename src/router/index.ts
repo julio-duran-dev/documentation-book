@@ -23,6 +23,22 @@ const router = createRouter({
       path: '/Technical/:id',
       name: 'Technical',
       component: () => import('../views/TechnicalArea.vue')
+    },
+    {
+      path: '/biblia',
+      redirect: '/biblia/home',
+      children: [
+        {
+          path: 'home',
+          name: 'homeBiblie',
+          component: () => import('../views/biblia/BiblieView.vue')
+        },
+        {
+          path: 'vida_Eterna',
+          name: 'vidaEterna',
+          component: () => import('../views/biblia/VidaEternaView.vue')
+        }
+      ]
     }
   ],
 })

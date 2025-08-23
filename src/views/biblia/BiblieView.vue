@@ -1,11 +1,12 @@
 <template>
   <div>
     <Navbar />
-    <Home />
+    <HomeBibliaComponente />
   </div>
 </template>
 
 <script setup lang="ts">
-import Home from '@/components/home/homeCodigo.vue';
 import Navbar from '@/components/nabvar/navbar.vue';
+import HomeBibliaComponente from '@/components/biblia/homeBibliaComponente.vue';
+
 </script>
