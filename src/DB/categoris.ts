@@ -10,6 +10,7 @@ export const CATEGORIS = {
     Server: 'Server',
     BuildTool: 'Build Tool',
     VCS: 'Version Control System',
-    CMD: 'CMD (Command Prompt)'
+    CMD: 'CMD (Command Prompt)',
+    ServiciosApi: 'Servicios/Api'
 
 }

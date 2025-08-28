@@ -1378,5 +1378,138 @@ Y en tu main:
       ')
     `
 
+  },
+  {
+    id: 21,
+    idPlataform: 18,
+    title: 'Integracion de Resend en Node.js',
+    description: `
+      Resend es un servicio/API (con librerías oficiales para distintos lenguajes) que se usa principalmente <br/>
+      para enviar emails transaccionales y de marketing de forma sencilla. <br/> <br/>
+
+      Instalacion 
+    `,
+    codeOne: `
+      npm install resend
+
+    `,
+    descriptionTwo: `
+      Configuración o cliente de Resend en Node.js <br/><br/>
+      Importa la clase Resend desde la librería oficial de npm. <br/>
+      Toma la clave de API de Resend desde las variables de entorno (.env). <br/>
+      Usa VITE_RESEND_API_KEY como nombre (típico en proyectos con Vite/React/Next.js). <br/>
+      Si no existe, le asigna un string vacío. <br/>
+      Si la API key no está configurada, lanza un error para avisar que no se puede usar Resend. <br/>
+      Crea una instancia de Resend con la API Key. </br>
+      La exporta para que en cualquier parte del proyecto puedas importar resend y enviar correos sin tener que reconfigurarlo cada vez.
+    `,
+    codeTwo: `
+      import { Resend } from 'resend'
+
+      const resendApiKey = process.env.VITE_RESEND_API_KEY || ''
+
+      if (!resendApiKey)
+        throw new Error('Missing Resend API KEY, searching in env file')
+
+      export const resend = new Resend(resendApiKey)
+    `,
+    descriptionThree: `
+      Configuracion del controlador en Node.js <br/><br/>
+      importamos el cliente de resend que hemos confirmado anteriormente <br/>
+      utilizamos la instacion que configuramos(cliente de resend) y luego usamos los metodos emails.send(...)<br/>
+      data devuelve la respuesta de la API (ejemplo: ID del correo enviado). <br/>
+      error devuelve información si algo salió mal (ejemplo: API key inválida, dominio no verificado, etc.). <br/>
+      luego configuramos el objeto de resend <br/>
+      from: domino creado en resend verificado <br/>
+      to: array de emails a los que se les enviar la informacion <br/>
+      subject: es el subject del email que llegara a los correos
+      html: es un template de lo que se enviara por correo elecctronico <br/>
+      text: Contenido del correo en texto plano (sin HTML). Se usa como fallback para clientes que no soportan HTML o si no usas plantilla. <br/>
+      template: Se refiere a una plantilla guardada en Resend (en el dashboard o vía API). En lugar de poner el HTML a mano, le dices: “usa la plantilla depositRequest”. <br/>
+      params: Son los valores dinámicos que la plantilla puede necesitar.<br/>
+      Ejemplo: si tu plantilla depositRequest tiene un placeholder como {{depositUrl}}, Resend lo reemplazará por el valor que envías en params.depositUrl.
+    `,
+    codeThree: `
+    {
+      subject: 'Deposit',
+      text: '',
+      from: 'Poggesi USA <noreply@poggesiusa.com>',
+      to: emails.value,
+      template: 'depositRequest',
+      params: {
+        depositUrl: 'https///deposit.com'
+      }
+    `,
+    codeFour: `
+      import { resend } from '../libs/resend.js'
+
+      export async function resendSendEmailController(req, res) {
+        const body = req.body
+
+        const { data, error } = resend.emails.send({
+                from: 'tu@dominio.com',
+                to: ['correo1@ejemplo.com', 'correo2@ejemplo.com', 'correo3@ejemplo.com'],
+                subject: 'Hola desde Resend',
+                html: '<strong>Este es un correo de prueba</strong>',
+              })
+        
+
+        if (error) {
+          return res.status(400).json({
+            error: error.message,
+            data: null
+          })
+        }
+
+        return res.status(200).json({
+          data,
+          error: null
+        })
+      }
+
+
+    `,
+    descriptionFive: `
+      Creamos un archivo de rutas para resend en nuestra carpeta routes para tener las rutas de resend separadas de las demas
+    `,
+    codeFive: `
+      import { Router } from 'express'
+      import { resendSendEmailController } from '../controllers/resend-controller/resend-controller.js'
+
+      const router = Router()
+
+      router.post('/send', resendSendEmailController)
+
+      export default router
+    `,
+    descriptionSix: `
+      importamos nuestras rutas en el arrchivo app.js de nuestro server en node.js ejemplo del archivo app.js
+    `,
+    codeSix: `
+      import express from 'express'
+      import path from 'node:path'
+      import cors from 'cors'
+      import resendRoutes from './routes/resend-routes.js'
+
+      console.log('Server time:', new Date().toString());
+      const app = express()
+      const __dirname = path.resolve()
+
+      app.use(express.json({ limit: '50mb' }))
+      app.use(cors())
+      app.use(express.static('dist'))
+
+      app.use('/api/resend', resendRoutes)
+
+
+      app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+      })
+
+      export default app
+    `
+
+
+
   }
 ]

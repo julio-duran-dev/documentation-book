@@ -16,6 +16,7 @@ import imgTypeScript from "../assets/img/Typescript.svg.png"
 import imgCss from "../assets/img/Css.png"
 import imgGit from "../assets/img/git-logo.png"
 import imgPowerShell from "../assets/img/powerShell.png"
+import imgResend from "../assets/img/resend_integration_logo.png"
 
 export const dataFrameworks = [
   {
@@ -137,4 +138,12 @@ export const dataFrameworks = [
     image: imgPowerShell,
     rating: 4
   },
+  {
+    id: 18,
+    name: 'Email API platform - Resend',
+    category: CATEGORIS.ServiciosApi,
+    image: imgResend,
+    rating: 3
+  }
+
 ]
