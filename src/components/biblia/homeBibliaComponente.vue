@@ -28,7 +28,7 @@
               </div>
             </div>
             <div>
-              <Button @click="viewPage(item.id)" class="mr-3 px-5 roboto-regular botonBase">View</Button>
+              <Button @click="viewPage(item.routeName)" class="mr-3 px-5 roboto-regular botonBase">View</Button>
             </div>
           </div>
         </div>
@@ -56,7 +56,8 @@
                   </div>
                 </div>
                 <div class=" w-full">
-                  <Button @click="viewPage(item.id)" class="w-full roboto-regular botonBase" style="">View</Button>
+                  <Button @click="viewPage(item.routeName)" class="w-full roboto-regular botonBase"
+                    style="">View</Button>
 
                 </div>
               </div>
@@ -79,12 +80,8 @@ const layout = ref('grid');
 const options = ref(['list', 'grid']);
 const router = useRouter()
 
-const viewPage = (id: number) => {
-
-  if (id === TEMAS_BIBLICOS_ID.VIDA_ENTER) {
-    router.push({ name: 'vidaEterna' })
-  }
-
+const viewPage = (routeName: string) => {
+  router.push({ name: routeName })
 
 }
 

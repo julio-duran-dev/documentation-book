@@ -37,6 +37,11 @@ const router = createRouter({
           path: 'vida_Eterna',
           name: 'vidaEterna',
           component: () => import('../views/biblia/VidaEternaView.vue')
+        },
+        {
+          path: 'la_oracion',
+          name: 'laOracion',
+          component: () => import('../views/biblia/laOracion.vue')
         }
       ]
     }
