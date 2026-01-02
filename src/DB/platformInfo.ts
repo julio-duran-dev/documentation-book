@@ -1511,5 +1511,54 @@ Y en tu main:
 
 
 
+  },
+  {
+    id:22,
+    idPlataform: 10,
+    title: 'Libreria Lodash, utiliza la función cloneDeep para crear una copia profunda de un objeto en JavaScript',
+    description: `
+      La función cloneDeep de la librería Lodash se utiliza para crear una copia profunda (deep copy) de un objeto en JavaScript. <br/>
+      A diferencia de una copia superficial (shallow copy), que solo copia las referencias a los objetos anidados, <br/>   
+      Crea una copia completamente independiente del objeto original, incluyendo objetos y arrays anidados dentro de él. <br/><br/>
+      Esto es útil cuando quieres modificar la copia sin afectar el objeto original. <br/><br/>
+      Ejemplo de uso:
+    `,
+    codeOne: `
+      import { ref } from 'vue'
+      import { cloneDeep } from 'lodash-es'
+
+      const initialQuote = ref<Quote | null>(null)
+
+      function setInitialQuote(quote: Quote) {
+        initialQuote.value = cloneDeep(quote)
+      }
+      `
+  },
+  {
+    id: 23,
+    idPlataform: 10,
+    title: 'Libreria Lodash, utiliza la función isEqual para comparar dos objetos en JavaScript',
+    description: `
+      La función isEqual de la librería Lodash se utiliza para comparar dos valores en JavaScript y determinar si son iguales en contenido y estructura. <br/>
+      A diferencia del operador de igualdad estricta (===), que solo compara referencias para objetos, isEqual realiza una comparación profunda propiedades, arrays, objetos anidados, valores primitivos (deep comparison). <br/> 
+      Devuelve: true si los valores son iguales, false si no lo son. <br/><br/>
+      Ejemplo de uso:
+    `,
+    codeOne: `
+      import { ref } from 'vue'
+      import { isEqual } from 'lodash-es'
+
+      const initialQuote = ref<Quote | null>(null)
+      const currentQuote = ref<Quote | null>(null)
+
+      function hasQuoteChanged(): boolean {
+        return !isEqual(initialQuote.value, currentQuote.value)
+      }
+      `,
+    descriptionTwo: `
+      En este ejemplo, isEqual compara initialQuote.value y currentQuote.value profundamente. <br/>
+      Si son iguales en contenido y estructura, devuelve true; si hay alguna diferencia, devuelve false. <br/>
+      Esto es útil para detectar cambios en objetos complejos sin preocuparte por referencias.
+    `
   }
 ]
