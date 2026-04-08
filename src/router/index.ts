@@ -42,6 +42,11 @@ const router = createRouter({
           path: 'la_oracion',
           name: 'laOracion',
           component: () => import('../views/biblia/laOracion.vue')
+        },
+        {
+          path: 'quien_es_dios',
+          name: 'quienEsDios',
+          component: () => import('../views/biblia/QuienEsDios.vue')
         }
       ]
     }

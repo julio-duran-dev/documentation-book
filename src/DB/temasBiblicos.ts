@@ -18,5 +18,13 @@ export const temas_biblicos = [
     image: laOracionPortada,
     rating: 5,
     routeName: 'laOracion'
+  },
+  {
+    id: TEMAS_BIBLICOS_ID.DIOS,
+    name: 'Quien es Dios',
+    category: "Deidad",
+    image: laOracionPortada,
+    rating: 5,
+    routeName: 'quienEsDios'
   }
 ]

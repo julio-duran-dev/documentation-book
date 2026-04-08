@@ -1,4 +1,4 @@
-import { CATEGORIS } from "./categoris.ts"
+import { CATEGORIS, FrameWorkAndLeguages } from "./categoris.ts"
 import imgVue from "../assets/logo.svg"
 import imgNext from "../assets/img/nextjs.jpeg"
 import imgReacNative from "../assets/img/reactnative.svg"
@@ -17,133 +17,141 @@ import imgCss from "../assets/img/Css.png"
 import imgGit from "../assets/img/git-logo.png"
 import imgPowerShell from "../assets/img/powerShell.png"
 import imgResend from "../assets/img/resend_integration_logo.png"
+import imgAWS from "../assets/img/aws.png"
 
 export const dataFrameworks = [
   {
-    id: 1,
+    id: FrameWorkAndLeguages.VueJs,
     name: "Vue.js",
     category: CATEGORIS.FrameWork,
     image: imgVue,
     rating: 5
   },
   {
-    id: 2,
+    id: FrameWorkAndLeguages.NextJs,
     name: "Next.js",
     category: CATEGORIS.FrameWork,
     image: imgNext,
     rating: 2
   },
   {
-    id: 3,
+    id: FrameWorkAndLeguages.ReactNative,
     name: "React Native",
     category: CATEGORIS.FrameWork,
     image: imgReacNative,
     rating: 2
   },
   {
-    id: 4,
+    id: FrameWorkAndLeguages.NodeJs,
     name: "Node.js",
     category: CATEGORIS.FrameWork,
     image: imgNode,
     rating: 3
   },
   {
-    id: 5,
+    id: FrameWorkAndLeguages.JavaScript,
     name: "Java script",
     category: CATEGORIS.Language,
     image: imgJavascritp,
     rating: 5
   },
   {
-    id: 6,
+    id: FrameWorkAndLeguages.Stripe,
     name: "Stipe",
     category: CATEGORIS.PaymentService,
     image: imgStripe,
     rating: 2
   },
   {
-    id: 7,
+    id: FrameWorkAndLeguages.FlutterFlow,
     name: "FlutterFlow",
     category: CATEGORIS.DevelopmentPlatform,
     image: flutterFlow,
     rating: 2
   },
   {
-    id: 8,
+    id: FrameWorkAndLeguages.SOLID,
     name: "SOLID",
     category: CATEGORIS.SoftwareDesignPrinciples,
     image: imgSolid,
     rating: 5
   },
   {
-    id: 9,
+    id: FrameWorkAndLeguages.Netsuite,
     name: "Netsuite",
     category: CATEGORIS.CloudERPPlatform,
     image: imgNetsuite,
     rating: 2
   },
   {
-    id: 10,
+    id: FrameWorkAndLeguages.Libraries,
     name: "Libraries",
     category: CATEGORIS.Libraries,
     image: imgLibrerias,
     rating: 5
   },
   {
-    id: 11,
+    id: FrameWorkAndLeguages.Supabase,
     name: "Supabase",
     category: CATEGORIS.DataBase,
     image: imgSupabase,
     rating: 4
   },
   {
-    id: 12,
+    id: FrameWorkAndLeguages.CloudWays,
     name: "Cloud Ways",
     category: CATEGORIS.Server,
     image: imgCloudays,
     rating: 3
   },
   {
-    id: 13,
+    id: FrameWorkAndLeguages.Vite,
     name: "Vite",
     category: CATEGORIS.BuildTool,
     image: imgVite,
     rating: 3
   },
   {
-    id: 14,
+    id: FrameWorkAndLeguages.TypeScript,
     name: "Typescript",
     category: CATEGORIS.Language,
     image: imgTypeScript,
     rating: 3
   },
   {
-    id: 15,
+    id: FrameWorkAndLeguages.Css,
     name: "Css",
     category: CATEGORIS.Language,
     image: imgCss,
     rating: 4
   },
   {
-    id: 16,
+    id: FrameWorkAndLeguages.Git,
     name: "Git",
     category: CATEGORIS.VCS,
     image: imgGit,
     rating: 4
   },
   {
-    id: 17,
+    id: FrameWorkAndLeguages.PowerShell,
     name: "PowerShell",
     category: CATEGORIS.CMD,
     image: imgPowerShell,
     rating: 4
   },
   {
-    id: 18,
+    id: FrameWorkAndLeguages.Resend,
     name: 'Email API platform - Resend',
     category: CATEGORIS.ServiciosApi,
     image: imgResend,
     rating: 3
+  },
+  {
+    id: FrameWorkAndLeguages.AWS,
+    name: 'AWS',
+    category: CATEGORIS.CloudPlatform,
+    image: imgAWS,
+    rating: 4
   }
 
 ]

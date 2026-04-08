@@ -16,11 +16,12 @@ import id13img9 from "@/assets/img/imgDB/supabase/apiDocsSupabase_9.png"
 import id13img10 from "@/assets/img/imgDB/supabase/apiDocsSupabase_10.png"
 import id13img11 from "@/assets/img/imgDB/supabase/apiDocsSupabase_11.png"
 import { title } from "@primeuix/themes/aura/card"
+import { FrameWorkAndLeguages } from "./categoris"
 
 export const PlataformInfo = [
   {
     id: 1,
-    idPlataform: 9,
+    idPlataform: FrameWorkAndLeguages.Netsuite,
     title: 'Tabla de Locations en netsuit',
     img: [],
     description: ''
@@ -28,7 +29,7 @@ export const PlataformInfo = [
   },
   {
     id: 2,
-    idPlataform: 9,
+    idPlataform: FrameWorkAndLeguages.Netsuite,
     title: 'Realizar una busqueda avanzada en alguna tabla y agregar filtros',
     img: [id2img1, id2img2, id2img3, id2img4],
     description: '1) Ir a: Reports > Saved Searches > All Saved Searches > New Save Search <br/><br/> 2) Haz clic en "New Saved Search" > elige "Item" como tipo de búsqueda (te llevará a la pantalla de configuración de búsqueda de ítems) <br/><br/> 3) Una vez allí, haz clic en la pestaña "Criteria" <br/><br/> 4) Dentro de los filtros, haz clic en "Add Filter" <br/><br/> 5) En la lista desplegable, busca y selecciona la opcion por la que quieres filtrar <br/><br/>6) Luego preciona el boton preview'
@@ -36,7 +37,7 @@ export const PlataformInfo = [
   },
   {
     id: 3,
-    idPlataform: 10,
+    idPlataform: FrameWorkAndLeguages.Libraries,
     title: 'Mostrar vistas de código con resaltado de sintaxis (code blocks) usando Prism.js',
     img: [],
     description: `
@@ -102,7 +103,7 @@ export const PlataformInfo = [
   },
   {
     id: 4,
-    idPlataform: 1,
+    idPlataform: FrameWorkAndLeguages.VueJs,
     title: 'Creacion de el componente layout Vue',
     img: [],
     description: `
@@ -224,7 +225,7 @@ export const PlataformInfo = [
   },
   {
     id: 5,
-    idPlataform: 1,
+    idPlataform: FrameWorkAndLeguages.VueJs,
     title: 'Utilizacion de componente layout en las rutas en Vue Router',
     img: [],
     description: `
@@ -289,7 +290,7 @@ export const PlataformInfo = [
   },
   {
     id: 6,
-    idPlataform: 10,
+    idPlataform: FrameWorkAndLeguages.Libraries,
     title: 'Libreria Lodash, utiliza la función debounce que limita la cantidad de veces que se ejecuta una función',
     img: [],
     description: `
@@ -340,7 +341,7 @@ export const PlataformInfo = [
   },
   {
     id: 7,
-    idPlataform: 4,
+    idPlataform: FrameWorkAndLeguages.NodeJs,
     img: [id7img1],
     title: 'Crear un cron job',
     description: `
@@ -410,7 +411,7 @@ export const PlataformInfo = [
   },
   {
     id: 8,
-    idPlataform: 14,
+    idPlataform: FrameWorkAndLeguages.TypeScript,
     title: '¿Qué es Record<K, V>?',
     description: `
     En TypeScript, Record<K, V> es una utilidad que permite declarar objetos donde: <br/>
@@ -553,7 +554,7 @@ export const PlataformInfo = [
   },
   {
     id: 9,
-    idPlataform: 10,
+    idPlataform: FrameWorkAndLeguages.Libraries,
     title: '@tanstack/vue-query',
     description: `
      @tanstack/vue-query es una biblioteca (una dependencia externa de NPM) diseñada específicamente para manejar data-fetching y gestión de estados del servidor en aplicaciones Vue. b\<br/>
@@ -869,7 +870,7 @@ Y en tu main:
   },
   {
     id: 10,
-    idPlataform: 16,
+    idPlataform: FrameWorkAndLeguages.Git,
     title: "Crear y cambiar entre ramas",
     description: `
       Para crear una nueva rama en Git llamada julio, puedes usar el siguiente comando en tu terminal:
@@ -904,7 +905,7 @@ Y en tu main:
   },
   {
     id: 11,
-    idPlataform: 13,
+    idPlataform: FrameWorkAndLeguages.Vite,
     title: 'Acceso a las variables de entorno del archivo .env',
     description: `
     Con Vite en un proyecto Vue tienes acceso a las variables de entorno definidas en archivos .env.
@@ -927,7 +928,7 @@ Y en tu main:
   },
   {
     id: 12,
-    idPlataform: 16,
+    idPlataform: FrameWorkAndLeguages.Git,
     title: 'Configurar el gitignore',
     description: `
     Para evitar que tu archivo .env se suba a GitHub, debes agregarlo al archivo .gitignore de tu proyecto. <br />
@@ -965,7 +966,7 @@ Y en tu main:
   },
   {
     id: 13,
-    idPlataform: 11,
+    idPlataform: FrameWorkAndLeguages.Supabase,
     title: 'Configurar Supabese en Vue',
     img: [id13img1, id13img2, id13img3, id13img4, id13img5, id13img6],
     description: `
@@ -1006,7 +1007,7 @@ Y en tu main:
   },
   {
     id: 14,
-    idPlataform: 11,
+    idPlataform: FrameWorkAndLeguages.Supabase,
     title: 'Crear sistema de login de supabse por emil OTP Email one-time passwords (OTP)',
     img: [id13img7, id13img8, id13img9, id13img10, id13img11],
     description: `
@@ -1075,7 +1076,7 @@ Y en tu main:
   },
   {
     id: 15,
-    idPlataform: 14,
+    idPlataform: FrameWorkAndLeguages.TypeScript,
     title: 'Interface',
     description: `
     En TypeScript, un interface (interfaz) es una forma de definir la estructura que debe tener un objeto, función o clase. <br/>
@@ -1155,7 +1156,7 @@ Y en tu main:
   },
   {
     id: 16,
-    idPlataform: 14,
+    idPlataform: FrameWorkAndLeguages.TypeScript,
     title: 'Tipado de funciones',
     description: `
       Ejemplo de la funcion tipada
@@ -1195,7 +1196,7 @@ Y en tu main:
   },
   {
     id: 17,
-    idPlataform: 14,
+    idPlataform: FrameWorkAndLeguages.TypeScript,
     title: 'Configuracion de el archivo tsconfig.json para que TypeScript sepa qué tipo asignarle a un archivo .png por defecto.',
     description: `
     En la raíz de tu proyecto (o dentro de src/), crea un archivo llamado por ejemplo: <br/>
@@ -1267,7 +1268,7 @@ Y en tu main:
   },
   {
     id: 18,
-    idPlataform: 11,
+    idPlataform: FrameWorkAndLeguages.Supabase,
     title: 'Validar la seccion activa del usuario en supabase',
     description: `
       Qué pasa cuando haces login en Supabase <br/>
@@ -1291,7 +1292,7 @@ Y en tu main:
   },
   {
     id: 19,
-    idPlataform: 14,
+    idPlataform: FrameWorkAndLeguages.TypeScript,
     title: 'Tipado de props en Vue3',
     description: `
       En Vue con TypeScript puedes tipar tus props de dos formas: <br/><br/>
@@ -1330,7 +1331,7 @@ Y en tu main:
   },
   {
     id: 20,
-    idPlataform: 11,
+    idPlataform: FrameWorkAndLeguages.Supabase,
     title: `Obtener informacion de una tabla de supabase que este relacionada con otras tablas`,
     description: `
     En este ejemplo consultamos la tabla tmc de Supabase lo cual tiene una columna status_payment relacionada con la tabla tmc_status_payment <br/>
@@ -1381,7 +1382,7 @@ Y en tu main:
   },
   {
     id: 21,
-    idPlataform: 18,
+    idPlataform: FrameWorkAndLeguages.Resend,
     title: 'Integracion de Resend en Node.js',
     description: `
       Resend es un servicio/API (con librerías oficiales para distintos lenguajes) que se usa principalmente <br/>
@@ -1514,7 +1515,7 @@ Y en tu main:
   },
   {
     id:22,
-    idPlataform: 10,
+    idPlataform: FrameWorkAndLeguages.Libraries,
     title: 'Libreria Lodash, utiliza la función cloneDeep para crear una copia profunda de un objeto en JavaScript',
     description: `
       La función cloneDeep de la librería Lodash se utiliza para crear una copia profunda (deep copy) de un objeto en JavaScript. <br/>
@@ -1536,7 +1537,7 @@ Y en tu main:
   },
   {
     id: 23,
-    idPlataform: 10,
+    idPlataform: FrameWorkAndLeguages.Libraries,
     title: 'Libreria Lodash, utiliza la función isEqual para comparar dos objetos en JavaScript',
     description: `
       La función isEqual de la librería Lodash se utiliza para comparar dos valores en JavaScript y determinar si son iguales en contenido y estructura. <br/>
@@ -1560,5 +1561,8 @@ Y en tu main:
       Si son iguales en contenido y estructura, devuelve true; si hay alguna diferencia, devuelve false. <br/>
       Esto es útil para detectar cambios en objetos complejos sin preocuparte por referencias.
     `
+  },
+  {
+    
   }
 ]
