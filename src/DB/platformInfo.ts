@@ -15,7 +15,7 @@ import id13img8 from "@/assets/img/imgDB/supabase/apiDocsSupabase_8.png"
 import id13img9 from "@/assets/img/imgDB/supabase/apiDocsSupabase_9.png"
 import id13img10 from "@/assets/img/imgDB/supabase/apiDocsSupabase_10.png"
 import id13img11 from "@/assets/img/imgDB/supabase/apiDocsSupabase_11.png"
-import { title } from "@primeuix/themes/aura/card"
+import id24img1 from "@/assets/img/imgDB/redis/docker-up.png"
 import { FrameWorkAndLeguages } from "./categoris"
 
 export const PlataformInfo = [
@@ -1563,6 +1563,86 @@ Y en tu main:
     `
   },
   {
-    
+    id: 24,
+    idPlataform: FrameWorkAndLeguages.Redis,
+    title: 'Configurar Redis en Node.js',
+    img: [id24img1],
+    descriptionTwo: `
+      Redis no tiene soporte oficial para Windows. El equipo de Redis desarrolla el software específicamente para sistemas POSIX (Linux, BSD, etc.) <br/>
+      una de las opciones de usar redis en windows es usar Docker para ejecutar Redis en un contenedor. <br/><br/>
+      priemro tienes que instalar Docker Desktop en tu máquina con Windows. <br/><br/>
+      una vez instalado Docker, tienes que crear en la raiz de tu proyecto un archivo llamado docker-compose.yml con el siguiente contenido:
+      `,
+    codeTwo:`
+      services:
+        redis:
+          image: redis
+          container_name: redis-server
+          ports:
+            - '6379:6379' 
+      `,
+      descriptionThree: `esto le dice a Docker que quieres ejecutar un contenedor con la imagen oficial de Redis, nombrarlo redis-server y exponer el puerto 6379 (puerto por defecto de Redis) <br/> para que puedas conectarte desde tu aplicación Node.js. <br/><br/>
+      Luego, en tu terminal, navega a la raíz de tu proyecto y ejecuta el siguiente comando para iniciar el contenedor de Redis: <br/><br/>
+      docker-compose up -d <br/><br/>
+      Esto descargará la imagen de Redis (si no la tienes) y ejecutará el contenedor en segundo plano. <br/> revisar la imagen numero uno para ver como es la conexion de docker al ejecutar el comando <br/><br/>
+      Ahora instalamos la librería de Redis para Node.js, que se llama redis. <br/><br/>
+      npm install redis <br/><br/>
+      Luego se crea un cliente de Redis en la carpeta libs en tu aplicación Node.js para conectarte al servidor Redis que está corriendo en Docker. <br/><br/>
+      `,
+      codeThree:`
+      import { createClient } from 'redis'
+
+      const redisClient = createClient({
+        url: 'redis://localhost:6379'
+      })
+
+      // Manejo de errores básico para que no se caiga el servidor si Redis falla
+      redisClient.on('error', (err) => console.log('Redis Client Error', err))
+
+      // Conectamos el cliente (importante en la v4 de Redis)
+      await redisClient.connect()
+
+      export { redisClient }
+
+      `,
+      descriptionFour: `
+      Con esto, tu aplicación Node.js ya está configurada para usar Redis a través de Docker en Windows. <br/><br/>
+      Puedes usar redisClient para realizar operaciones de lectura/escritura(redisClient.get, /redisClient.set) en Redis desde tu código Node.js.
+     `,
+     codeFour:`
+      import { redisClient } from '../libs/redis/redisClient.js'
+
+      export async function getNetsuiteClassificationController(req, res) {
+        try {
+          
+          const replayedResult = await redisClient.get('netsuite_classifications')
+
+          if (replayedResult) return res.status(200).json(JSON.parse(replayedResult))
+
+          const query = 'SELECT * FROM  classification'
+
+          const result = await querySuiteQL({
+            query,
+            limit: 1000
+          })
+
+          const saveResult = await redisClient.set(
+            'netsuite_classifications',
+            JSON.stringify(result)
+          )
+
+          res.status(200).json(result)
+        } catch (error) {
+          console.error('Error getNetsuiteClassificationController:', error.stack)
+          res.status(500).json({ error: 'Internal Server Error' + error.message })
+        }
+      }
+     `,
+     descriptionFive: `
+      En este ejemplo, el controlador primero intenta obtener los datos de Redis usando redisClient.get('netsuite_classifications'). <br/><br/>
+      Si encuentra un resultado en Redis (cache hit), lo devuelve directamente. <br/><br/>
+      Si no encuentra un resultado (cache miss), realiza la consulta a la base de datos, guarda el resultado en Redis redisClient.set('netsuite_classifications', JSON.stringify(result)) y luego lo devuelve. <br/><br/>
+      La segunda vez que se llame a este controlador, ya tendrá los datos en Redis y será mucho más rápido, devolviendo los resultados desde la caché redisClient.get('netsuite_classifications'). <br/><br/>
+    `
   }
 ]

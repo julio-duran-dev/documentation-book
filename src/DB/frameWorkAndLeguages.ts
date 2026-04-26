@@ -18,6 +18,7 @@ import imgGit from "../assets/img/git-logo.png"
 import imgPowerShell from "../assets/img/powerShell.png"
 import imgResend from "../assets/img/resend_integration_logo.png"
 import imgAWS from "../assets/img/aws.png"
+import imgRedis from "../assets/img/redis.png"
 
 export const dataFrameworks = [
   {
@@ -151,6 +152,13 @@ export const dataFrameworks = [
     name: 'AWS',
     category: CATEGORIS.CloudPlatform,
     image: imgAWS,
+    rating: 4
+  },
+  {
+    id: FrameWorkAndLeguages.Redis,
+    name: 'Redis',
+    category: CATEGORIS.CacheDeDatos,
+    image: imgRedis,
     rating: 4
   }
 

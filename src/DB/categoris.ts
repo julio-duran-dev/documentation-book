@@ -13,6 +13,7 @@ export const CATEGORIS = {
     CMD: 'CMD (Command Prompt)',
     ServiciosApi: 'Servicios/Api',
     CloudPlatform: 'Cloud Platform',
+    CacheDeDatos: 'Caché de Datos'
 }
 
 export const FrameWorkAndLeguages = {
@@ -34,5 +35,6 @@ export const FrameWorkAndLeguages = {
     Git:16,
     PowerShell:17,
     Resend:18,
-    AWS:19
+    AWS:19,
+    Redis:20
 }
