@@ -16,6 +16,7 @@ import id13img9 from "@/assets/img/imgDB/supabase/apiDocsSupabase_9.png"
 import id13img10 from "@/assets/img/imgDB/supabase/apiDocsSupabase_10.png"
 import id13img11 from "@/assets/img/imgDB/supabase/apiDocsSupabase_11.png"
 import id24img1 from "@/assets/img/imgDB/redis/docker-up.png"
+import id25img1 from "@/assets/img/imgDB/cloudways/img1.png"
 import { FrameWorkAndLeguages } from "./categoris"
 
 export const PlataformInfo = [
@@ -1644,5 +1645,36 @@ Y en tu main:
       Si no encuentra un resultado (cache miss), realiza la consulta a la base de datos, guarda el resultado en Redis redisClient.set('netsuite_classifications', JSON.stringify(result)) y luego lo devuelve. <br/><br/>
       La segunda vez que se llame a este controlador, ya tendrá los datos en Redis y será mucho más rápido, devolviendo los resultados desde la caché redisClient.get('netsuite_classifications'). <br/><br/>
     `
+  },
+  {
+    id: 25,
+    idPlataform: FrameWorkAndLeguages.CloudWays,
+    img: [id25img1],
+    title: 'Configurar un servidor en CloudWays',
+    description: `
+      CloudWays es una plataforma de hosting que te permite desplegar aplicaciones, para aplicaciones Vue.js <br/>
+      necesitamos una instancia PHP en el servidor de CloudWays, ya que CloudWays no tiene una opción específica para Node.js. <br/><br/>
+      una vez que tienes tu servidor configurado con PHP, puedes usar SSH para conectarte a tu servidor y luego instalar Node.js manualmente. <br/><br/>
+      Para instalar Node.js en tu servidor de CloudWays, puedes seguir estos pasos: <br/><br/>
+      1. Conéctate a tu servidor usando SSH. Puedes usar un cliente SSH como PuTTY o la terminal de tu sistema operativo. <br/><br/>
+      2. Una vez conectado, muevete a la carpeta applications con el siguiente comando cd applications <br/><br/>
+      3. Luego navega a la carpeta de tu aplicación cd tu_carpeta_de_aplicacion <br/><br/>
+      4. Ahora, dentro de la carpeta de tu aplicacion viaja a la carpeta public_html cd public_html <br/><br/>
+      5. Ahora debes iniciar el servidor de tu aplicacion con el siguiente comando <br/><br/>
+      pm2 start npm --name "Nombre de mi aplicacion" -- start <br/><br/>
+      pm2 startup (para que inicie el servidor automaticamente) <br/><br/>
+      pm2 save (para guardar la configuracion de pm2) <br/><br/>
+      Con esto, tu aplicación Vue.js estará corriendo en tu servidor de CloudWays usando Node.js. <br/><br/>
+      6. Una ves echo esto ya puedes hacer el primer deploy de tu aplicación a CloudWays, para eso puedes usar Git para subir tu código a un repositorio remoto (GitHub)  <br/><br/>
+      7. Conectamos el servidor de CloudWays con tu repositorio de github, leemos la documentacion de CloudWays para conectar el repositorio con el servidor (ver la imagen uno en para encontrar los pasos) <br/><br/>
+      8. una ves echo el pull en cloudways y creado ya el servidor, ya puedes hacer deploy de tu aplicación, desde la consala entrando en la carpeta public_html y ejecutando el comando <br/>
+       npm run install una ves ejecutado segimos con npm run build para generar la carpeta dist con los archivos de producción<br/><br/>
+      9. y para finalizar ejecutamos el comando pm2 list para ver la lista de aplicaciones que tenemos corriendo y hay podemos verificar el id de nuestra aplicacion <br/><br/>
+      10. una ves que tengamos el id de la aplicacion ejecutamos el comando pm2 restar id para reiniciar el servidor y que tome los cambios de la nueva version de la aplicacion <br/><br/>
+      se veria algo asi pm2 restart 0 (si el id de la aplicacion es 0) <br/><br/>
+      Con esto, tu aplicación Vue.js estará desplegada y corriendo en tu servidor de CloudWays. <br/><br/>
+      Recuerda que cada vez que hagas cambios en tu código, debes repetir los pasos 8, 9 y 10 para actualizar tu aplicación en el servidor.
+     `
+
   }
 ]
