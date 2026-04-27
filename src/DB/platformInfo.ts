@@ -18,6 +18,7 @@ import id13img11 from "@/assets/img/imgDB/supabase/apiDocsSupabase_11.png"
 import id24img1 from "@/assets/img/imgDB/redis/docker-up.png"
 import id25img1 from "@/assets/img/imgDB/cloudways/img1.png"
 import { FrameWorkAndLeguages } from "./categoris"
+import { title } from "@primeuix/themes/aura/card"
 
 export const PlataformInfo = [
   {
@@ -1691,6 +1692,146 @@ Y en tu main:
       6. si quieres editar las variables de entorno, puedes hacerlo directamente en este archivo .env y luego guardar los cambios <br/><br/>
       7. una ves que hayas editado el archivo de variables de entorno, debes reiniciar el servidor para que tome los cambios, para eso ejecuta el comando pm2 list para ver la lista de aplicaciones que tienes corriendo y verificar el id de tu aplicacion <br/><br/>
       8. luego ejecuta el comando pm2 restart id para reiniciar el servidor y que tome los cambios de las nuevas variables de entorno <br/><br/>
+      `
+  },
+  {
+    id:27,
+    idPlataform: FrameWorkAndLeguages.Redis,
+    title:'Comfigurar tiempo de la Cahce de una peticion',
+    description:`
+      para colocar tiempo en que redis guarda respuesta en la cache, lo hacemos cuando guardamos la respuesta de la peticion en la cache
+    `,
+    codeOne:`
+      await redisClient.set('netsuite_classifications',JSON.stringify(result),{EX: 60 * 60})
+
+    `,
+    descriptionTwo:`
+      EX: 60 * 60 → esto le dice a Redis que expire esa clave después de 3600 segundos (1 hora). <br/><br/>
+      Con esto, la respuesta de esa petición se guardará en la caché de Redis durante 1 hora. <br/><br/>
+      Después de ese tiempo, Redis eliminará automáticamente esa clave y la próxima vez que se haga la petición, no encontrará el resultado en la caché (cache miss) y tendrá que volver a consultar la base de datos para obtener los datos actualizados.
+      si queremos que la guarde por 5 minutos, seria EX: 60 * 5 (300 segundos) <br/><br/>
+      Si no quieres que expire nunca, simplemente no le pasas la opción EX y la clave se quedará en Redis hasta que la elimines manualmente o el servidor de Redis se reinicie.
+      `
+  },
+  {
+    id: 28,
+    idPlataform: FrameWorkAndLeguages.Redis,
+    title: 'Evitar multiples peticiones a la base de datos en la primera request cuando no exite cache utilizando un sistema de locking ',
+    description:`Cuando no exite cache o cuando ya expiro su tiempo exite la posibilidad que entren varias peticiones al mismo tiempo y todas hagan la consulta a la base de datos, para evitar esto se puede implementar un sistema de locking utilizando Redis, el cual funciona de la siguiente manera: <br/><br/>
+1. Cuando llega una petición, el controlador intenta leer la respuesta de Redis (cache). <br/><br/>
+2. Si no encuentra la respuesta en Redis (cache miss), intenta adquirir un lock (bloqueo) en Redis usando una clave específica (ejemplo: lock:netsuite_classifications). <br/><br/>
+3. Si el lock se adquiere exitosamente, significa que esta petición es la primera que llegó y se encargará de hacer la consulta a la base de datos. <br/><br/>
+4. Mientras esta petición está procesando la consulta a la base de datos, las otras peticiones que lleguen intentarán adquirir el mismo lock pero no lo podrán obtener porque ya está bloqueado. <br/><br/>
+5. Las peticiones que no obtuvieron el lock entran en un ciclo de espera (polling) donde cada cierto tiempo intentan leer nuevamente la respuesta de Redis (cache) para ver si ya fue guardada por la primera petición que sí obtuvo el lock. <br/><br/>6. Una vez que la primera petición termina de procesar la consulta a la base de datos, guarda la respuesta en Redis (cache) y libera el lock. <br/><br/>
+7. Las peticiones que estaban en espera detectan que ya existe la respuesta en Redis (cache hit) y devuelven esa respuesta sin necesidad de hacer la consulta a la base de datos. <br/><br/>
+8. Si por alguna razón el lock no se libera (ejemplo: la petición que lo adquirió falla), las peticiones en espera seguirán intentando leer de Redis hasta un número máximo de reintentos o un tiempo límite, y si no encuentran la respuesta, devolverán un error indicando que el servicio no está disponible temporalmente. <br/><br/>
+esto funciona porque utilizamos  NX: true esto evita sobrescritura del lock si ya existe y EX: 10 esto hace que el lock expire automáticamente después de 10 segundos para evitar bloqueos eternos en caso de que la petición que lo adquirió falle. <br/><br/>
+cual es la logica de este sistema de locking: <br/><br/>
+-Caso 1: Se crea el lock <br/>
+  -La key NO existía <br/>
+  -Redis la guarda correctamente <br/>
+  -lock será: "OK" que es la respuesta que manda redis al guardar en cache <br/><br/>
+-Caso 2: NO se crea el lock<br/>
+  -La key ya existía (porque otra petición la creó) <br/>
+  -Redis no la guarda porque ya existe y devuelve null <br/>
+  -lock será: null <br/><br/>
+`,
+    codeOne:`
+      export async function getNetsuiteClassificationController(req, res) {
+      const cacheKey = 'netsuite_classifications'
+      const lockKey = 'lock:netsuite_classifications'
+
+      try {
+        // 1. Intentar leer cache
+        const cached = await redisClient.get(cacheKey)
+        if (cached) {
+          return res.status(200).json(JSON.parse(cached))
+        }
+
+        // 2. Intentar adquirir lock
+        const lock = await redisClient.set(lockKey, '1', {
+          NX: true,
+          EX: 10 // evita locks eternos
+        })
+
+        if (lock) {
+          // 🔥 SOLO 1 request entra aquí
+
+          const result = await querySuiteQL({
+            query: 'SELECT * FROM classification',
+            limit: 1000
+          })
+
+          // Guardar cache
+          await redisClient.set(cacheKey, JSON.stringify(result), {
+            EX: 60 // cache 1 min
+          })
+
+          // Liberar lock
+          await redisClient.del(lockKey)
+
+          return res.status(200).json(result)
+        }
+
+        // 3. Si no obtuviste el lock → esperar y reintentar
+        return await waitForCacheAndRespond(cacheKey, res)
+
+      } catch (error) {
+        console.error('Error:', error.stack)
+        return res.status(500).json({ error: error.message })
+      }
+    }
+    `,
+    codeTwo:`
+      async function waitForCacheAndRespond(cacheKey, res) {
+        const retries = 20
+        const delay = 200 // ms
+
+        for (let i = 0; i < retries; i++) {
+          await new Promise(resolve => setTimeout(resolve, delay))
+
+          const cached = await redisClient.get(cacheKey)
+          if (cached) {
+            return res.status(200).json(JSON.parse(cached))
+          }
+        }
+
+        // fallback si algo falla
+        return res.status(503).json({
+          error: 'Service temporarily unavailable, please try again'
+        })
+      }
+    `,
+    descriptionFour: `
+      ¿Qué hace esta función? waitForCacheAndRespond <br/><br/>
+      Básicamente:Si no pude hacer la query (porque otro tiene el lock), voy a esperar un poco a que el cache se llene y luego responder con eso. <br/>
+      1. Configuración inicial <br/>
+      const retries = 20 <br/>
+      const delay = 200 // ms <br/><br/>
+      retries = 20 → intentará máximo 20 veces, delay = 200ms → espera 200 milisegundos entre cada intento,Tiempo total máximo: 20 * 200ms = 4000ms (4 segundos) <br/><br/>
+      2. Loop de espera (polling) <br/>
+      for (let i = 0; i < retries; i++) { <br/>
+      Va a intentar varias veces ver si el cache ya está listo.<br/><br/>
+      3. Espera antes de consultar <br/>
+      await new Promise(resolve => setTimeout(resolve, delay)) <br/><br/>
+      Esto hace:<br/>
+
+      Pausar la ejecución 200ms<br/>
+      No bloquea el servidor (es async)<br/>
+
+      💡 Es como decir:<br/>
+
+      “espera un poquito antes de volver a mirar” <br/><br/>
+      4. Revisar si ya existe cache <br/>
+      const cached = await redisClient.get(cacheKey) <br/>
+      Aquí pregunta:“¿ya el proceso que tenía el lock terminó y guardó el resultado?” <br/><br/>
+      5. Si ya hay datos → responde <br/>
+      En cuanto detecta que: el otro request terminó, el cache ya está lleno responde inmediatamente <br/><br/>
+      6.Si nunca aparece el cache → fallback <br/>
+      return res.status(503).json({ <br/><br/>
+      7. hay que calcular muy bien el tiempo de respuesta del proceso que tiene el lock para configurar el delay y retries de forma adecuada. <br/><br/>
+      Si el proceso con lock suele tardar 2 segundos, podrías configurar delay: 500ms y retries: 10 para esperar hasta 5 segundos en total. <br/><br/>
+      Este sistema de locking + polling es una forma efectiva de evitar múltiples consultas a la base de datos cuando no hay cache, asegurando que solo <br/> una petición realice la consulta pesada mientras las demás esperan pacientemente por el resultado.
       `
   }
 ]
