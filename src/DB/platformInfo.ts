@@ -1676,5 +1676,21 @@ Y en tu main:
       Recuerda que cada vez que hagas cambios en tu código, debes repetir los pasos 8, 9 y 10 para actualizar tu aplicación en el servidor.
      `
 
+  },
+  {
+    id: 26,
+    idPlataform: FrameWorkAndLeguages.CloudWays,
+    title: 'ver las variables de entorno en CloudWays',
+    description: `
+      Para ver las variables de entorno en CloudWays, puedes seguir estos pasos: <br/><br/>
+      1. conectate al servidor por ssh <br/><br/>
+      2. entra en la carpeta applications cd applications <br/><br/>
+      3. luego entra en la carpeta de tu aplicacion cd tu_carpeta_de_aplicacion <br/><br/>
+      4. ahora viaja a la carpeta public_html cd public_html <br/><br/>
+      5. ahora ejecuta el comando nano .env para abrir el archivo de variables de entorno y ver su contenido <br/><br/>
+      6. si quieres editar las variables de entorno, puedes hacerlo directamente en este archivo .env y luego guardar los cambios <br/><br/>
+      7. una ves que hayas editado el archivo de variables de entorno, debes reiniciar el servidor para que tome los cambios, para eso ejecuta el comando pm2 list para ver la lista de aplicaciones que tienes corriendo y verificar el id de tu aplicacion <br/><br/>
+      8. luego ejecuta el comando pm2 restart id para reiniciar el servidor y que tome los cambios de las nuevas variables de entorno <br/><br/>
+      `
   }
 ]
