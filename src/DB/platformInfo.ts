@@ -17,6 +17,7 @@ import id13img10 from "@/assets/img/imgDB/supabase/apiDocsSupabase_10.png"
 import id13img11 from "@/assets/img/imgDB/supabase/apiDocsSupabase_11.png"
 import id24img1 from "@/assets/img/imgDB/redis/docker-up.png"
 import id25img1 from "@/assets/img/imgDB/cloudways/img1.png"
+import id29img1 from "@/assets/img/imgDB/supabase/supabase_restPasword.png"
 import { FrameWorkAndLeguages } from "./categoris"
 import { title } from "@primeuix/themes/aura/card"
 
@@ -1833,5 +1834,19 @@ cual es la logica de este sistema de locking: <br/><br/>
       Si el proceso con lock suele tardar 2 segundos, podrías configurar delay: 500ms y retries: 10 para esperar hasta 5 segundos en total. <br/><br/>
       Este sistema de locking + polling es una forma efectiva de evitar múltiples consultas a la base de datos cuando no hay cache, asegurando que solo <br/> una petición realice la consulta pesada mientras las demás esperan pacientemente por el resultado.
       `
+  },
+  {
+    id: 29,
+    idPlataform: FrameWorkAndLeguages.Supabase,
+    title: 'Restablecer contraseña de un usuario',
+    img: [id29img1],
+    description: `
+      Nos dirigimos al SQL Editor de Supabase e introducimos la nueva contraseña, que en este caso es Welcome123##, y seleccionamos el correo del usuario joel.montero@poggesiusa.com. Este usuario debe existir en la tabla Authentication.
+    `,
+    codeOne: `
+      update auth.users
+      set encrypted_password = crypt('Welcome123##', gen_salt('bf'))
+      where email = 'joel.montero@poggesiusa.com';
+    `
   }
 ]
