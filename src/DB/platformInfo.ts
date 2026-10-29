@@ -1848,5 +1848,20 @@ cual es la logica de este sistema de locking: <br/><br/>
       set encrypted_password = crypt('Welcome123##', gen_salt('bf'))
       where email = 'joel.montero@poggesiusa.com';
     `
+  },
+  {
+    id: 30,
+    idPlataform: FrameWorkAndLeguages.Supabase,
+    title: 'Incriptar un dato en supabase mediante sql editor',
+    description: `Se selecciona la tabla donde se va a encriptar el data "user" <br/>
+     luego se selecciona la columna que se va a actualizar "pin" <br/>
+     se usa la extencion crypt y se mete el dato que se va a encriptar "1234" <br/>
+     y por ultimo se selecciona la columna id = 5 de la tabla user para que el usuario con el id 5 sea al que se le actualice el dato
+     ` ,
+    codeOne: `
+      UPDATE public.users
+      SET pin = extensions.crypt('1234', extensions.gen_salt('bf'))
+      WHERE id = 5;
+    `
   }
 ]

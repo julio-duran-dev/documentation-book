@@ -25,21 +25,18 @@ Primero, revisa cómo están implementados actualmente los posts existentes para
 El nuevo post debe tener la siguiente información:
 
 **Título:**
-`Restablecer contraseña de un usuario`
+`Incriptar un dato encriptado en supabase mediante sql editor`
 
-**Imagen:**
-`src\assets\img\imgDB\supabase\supabase_restPasword.png`
 
 **Descripción:**
 
-`Nos dirigimos al SQL Editor de Supabase e introducimos la nueva contraseña, que en este caso es Welcome123##, y seleccionamos el correo del usuario joel.montero@poggesiusa.com. Este usuario debe existir en la tabla Authentication.`
 
 **Código:**
 
 ```sql
-update auth.users 
-set encrypted_password = crypt('Welcome123##', gen_salt('bf')) 
-where email = 'joel.montero@poggesiusa.com';
+UPDATE public.users
+SET pin = extensions.crypt('1234', extensions.gen_salt('bf'))
+WHERE id = 5;
 ```
 
 ### Requisitos importantes
